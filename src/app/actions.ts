@@ -207,7 +207,7 @@ export async function fetchFloodInfo(input: z.infer<typeof FloodInfoInputClientS
 
 export async function fetchReports(): Promise<UserReport[]> {
     // In a real app, this would fetch from a database.
-    // For now, we return mock data.
+    // For now, we return a mutable mock data array.
     await new Promise(resolve => setTimeout(resolve, 500));
     return initialReports;
 }
@@ -239,9 +239,13 @@ export async function submitReport(input: z.infer<typeof SubmitReportInputClient
             ...validatedInput,
             category: aiResult.category,
             summary: aiResult.summary,
+            photoHint: aiResult.photoHint,
             timestamp: new Date().toISOString(),
             user: lang === 'en' ? 'Anonymous Citizen' : 'Warga Anonim', // Placeholder for user
         };
+
+        // Prepend to the in-memory array to simulate persistence
+        initialReports.unshift(newReport);
 
         return newReport;
 

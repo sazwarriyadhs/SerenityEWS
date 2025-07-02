@@ -11,9 +11,10 @@ export interface UserReport {
     timestamp: string;
     user: string; // For now, just a mock user
     photoUrl?: string;
+    photoHint?: string;
 }
 
-// Initial mock data
+// Initial mock data - this will be mutated by new submissions
 export const initialReports: UserReport[] = [
     {
         id: '1',
@@ -25,6 +26,7 @@ export const initialReports: UserReport[] = [
         summary: 'Genangan air setinggi 30cm di Jalan Sudirman menyebabkan kemacetan lalu lintas.',
         timestamp: new Date(Date.now() - 1 * 60 * 60 * 1000).toISOString(),
         user: 'Warga Bogor',
+        photoHint: 'street flood',
     },
     {
         id: '2',
@@ -36,5 +38,6 @@ export const initialReports: UserReport[] = [
         summary: 'Pohon tumbang di dekat Taman Sempur menyebabkan penyempitan jalan.',
         timestamp: new Date(Date.now() - 3 * 60 * 60 * 1000).toISOString(),
         user: 'Pengguna Jalan',
+        photoHint: 'fallen tree',
     },
 ];

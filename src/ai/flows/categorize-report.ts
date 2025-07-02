@@ -28,6 +28,7 @@ export type CategorizeReportInput = z.infer<typeof CategorizeReportInputSchema>;
 const CategorizeReportOutputSchema = z.object({
   category: z.string().describe('A concise category for the incident (e.g., "Banjir", "Pohon Tumbang", "Kecelakaan Lalu Lintas", "Jalan Rusak", "Lainnya"). Respond in the requested language.'),
   summary: z.string().describe('A brief, one-sentence summary of the incident based on the photo and description. Respond in the requested language.'),
+  photoHint: z.string().describe('Two or three keywords in English describing the most prominent objects or scene in the photo. For example: "car flood" or "fallen tree road".'),
 });
 export type CategorizeReportOutput = z.infer<typeof CategorizeReportOutputSchema>;
 
@@ -41,7 +42,7 @@ const prompt = ai.definePrompt({
   output: {schema: CategorizeReportOutputSchema},
   prompt: `You are an emergency services dispatcher for the city of Bogor. Your task is to analyze user-submitted incident reports.
 
-Based on the provided photo and description, determine a concise, relevant category for the incident. Then, write a one-sentence summary.
+Based on the provided photo and description, determine a concise, relevant category for the incident. Then, write a one-sentence summary. Finally, provide two or three English keywords that describe the photo's content for image search purposes.
 
 Incident Details:
 - Description: {{{description}}}
@@ -50,6 +51,7 @@ Incident Details:
 
 Generate the category and summary in {{{language}}}.
 Possible categories include, but are not limited to: Banjir, Pohon Tumbang, Kecelakaan Lalu Lintas, Jalan Rusak, Kebakaran, Lainnya. If you generate a category in English, make sure it is a common term like: Flood, Fallen Tree, Traffic Accident, Road Damage, Fire, Other.
+The photo hint must always be in English.
 `,
 });
 

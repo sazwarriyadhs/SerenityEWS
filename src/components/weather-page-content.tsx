@@ -10,30 +10,7 @@ import SevenDayForecast from './seven-day-forecast';
 import AiRecommendations from './ai-recommendations';
 import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/contexts/language-context';
-
-const setCookie = (name: string, value: string, days: number) => {
-  let expires = "";
-  if (days) {
-    const date = new Date();
-    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-    expires = "; expires=" + date.toUTCString();
-  }
-  if (typeof document !== 'undefined') {
-    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
-  }
-}
-
-const getCookie = (name: string): string | null => {
-  if (typeof document === 'undefined') return null;
-  const nameEQ = name + "=";
-  const ca = document.cookie.split(';');
-  for(let i=0;i < ca.length;i++) {
-    let c = ca[i];
-    while (c.charAt(0)==' ') c = c.substring(1,c.length);
-    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-  }
-  return null;
-}
+import { getCookie, setCookie } from '@/lib/utils';
 
 export default function WeatherPageContent() {
     const [location, setLocation] = useState<Location>('city');

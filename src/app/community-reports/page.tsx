@@ -34,9 +34,10 @@ function ReportCard({ report, locale }: { report: UserReport, locale: Locale }) 
                 <Image
                     src={report.photoDataUri || report.photoUrl || 'https://placehold.co/600x400.png'}
                     alt={report.description}
-                    layout="fill"
-                    objectFit="cover"
-                    className="bg-secondary"
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="bg-secondary object-cover"
+                    data-ai-hint={report.photoHint}
                 />
             </div>
             <CardHeader>
@@ -88,7 +89,9 @@ export default function CommunityReportsPage() {
     }, []);
     
     const handleReportSubmitted = (newReport: UserReport) => {
-        setReports(prev => [newReport, ...prev].sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()));
+        // Add new report to the top of the list for immediate feedback
+        // The report is also persisted in the server's memory via the action
+        setReports(prev => [newReport, ...prev]);
     };
 
     const dateLocale = language === 'id' ? id : enUS;
