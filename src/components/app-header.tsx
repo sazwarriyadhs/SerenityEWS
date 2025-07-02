@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Button } from './ui/button';
-import { Sheet, SheetContent, SheetTrigger } from './ui/sheet';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from './ui/sheet';
 import { cn } from '@/lib/utils';
 import { useState } from 'react';
 import { useLanguage } from '@/contexts/language-context';
@@ -78,6 +78,9 @@ export function AppHeader() {
                                 </Button>
                             </SheetTrigger>
                             <SheetContent side="right">
+                               <SheetHeader>
+                                 <SheetTitle className="sr-only">Mobile Menu</SheetTitle>
+                               </SheetHeader>
                                <NavLinks isMobile />
                             </SheetContent>
                         </Sheet>
