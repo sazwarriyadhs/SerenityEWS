@@ -16,7 +16,7 @@ export function AppHeader() {
     const { t } = useLanguage();
 
     const navItems = [
-        { href: '/', label: t('nav.weather'), icon: CloudSun },
+        { href: '/weather', label: t('nav.weather'), icon: CloudSun },
         { href: '/earthquake', label: t('nav.earthquake'), icon: Zap },
         { href: '/landslide', label: t('nav.landslide'), icon: ArrowDownFromLine },
         { href: '/flood', label: t('nav.flood'), icon: Waves },

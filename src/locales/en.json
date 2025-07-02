@@ -164,5 +164,18 @@
         "ai_error_description": "Could not fetch AI-powered information for {0}.",
         "data_error_title": "Error",
         "data_error_description": "Failed to load {0} data."
+    },
+    "nearby_alert": {
+        "title": "Nearby Hazard Alert",
+        "subtitle": "Your real-time safety status based on your location.",
+        "requesting_location": "Requesting your location to assess nearby risks...",
+        "permission_denied_title": "Location Access Denied",
+        "permission_denied_description": "Please enable location services in your browser to use the Nearby Hazard Alert feature.",
+        "analyzing": "Analyzing your location against latest disaster data...",
+        "at_risk_title": "IMMEDIATE ALERT",
+        "safe_title": "You Are in a Safe Area",
+        "safe_message": "We have analyzed your current location against the latest data and found no immediate high-risk threats in your vicinity. Stay vigilant and check back for updates.",
+        "safety_first_recommendations": "Safety First Recommendations",
+        "view_weather": "View Full Weather Forecast"
     }
 }

@@ -17,6 +17,7 @@ import { getFloodData, FloodData } from "@/lib/flood";
 import { floodInfo, FloodInfoInput, FloodInfoOutput } from "@/ai/flows/flood-info";
 import { categorizeReport, CategorizeReportInput, CategorizeReportOutput } from "@/ai/flows/categorize-report";
 import { UserReport, initialReports } from "@/lib/reports";
+import { nearbyAlert, NearbyAlertOutput } from "@/ai/flows/nearby-alert-flow";
 
 
 type Language = 'en' | 'id';
@@ -251,5 +252,41 @@ export async function submitReport(input: z.infer<typeof SubmitReportInputClient
             return { error: "Invalid input." };
         }
         return { error: "Failed to submit report." };
+    }
+}
+
+const NearbyAlertInputClientSchema = z.object({
+    latitude: z.number(),
+    longitude: z.number(),
+});
+
+export async function fetchNearbyAlert(input: z.infer<typeof NearbyAlertInputClientSchema>, lang: Language): Promise<NearbyAlertOutput | null> {
+    try {
+        const validatedInput = NearbyAlertInputClientSchema.parse(input);
+
+        // Fetch all disaster data in parallel
+        const [earthquake, landslide, fire, whirlwind, volcano, flood] = await Promise.all([
+            getEarthquakeData(),
+            getLandslideData(),
+            getFireData(),
+            getWhirlwindData(),
+            getVolcanoData(),
+            getFloodData()
+        ]);
+
+        const alert = await nearbyAlert({
+            userLocation: validatedInput,
+            language: lang === 'en' ? 'English' : 'Indonesian',
+            disasterData: { earthquake, landslide, fire, whirlwind, volcano, flood }
+        });
+
+        return alert;
+
+    } catch (error) {
+        console.error("Error fetching nearby alert:", error);
+        if (error instanceof z.ZodError) {
+            console.error("Zod validation errors:", error.errors);
+        }
+        return null;
     }
 }

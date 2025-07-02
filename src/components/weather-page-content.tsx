@@ -35,7 +35,7 @@ const getCookie = (name: string): string | null => {
   return null;
 }
 
-export default function BogorWeatherWatch() {
+export default function WeatherPageContent() {
     const [location, setLocation] = useState<Location>('city');
     const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
     const [recommendations, setRecommendations] = useState<WeatherRecommendationsOutput | null>(null);

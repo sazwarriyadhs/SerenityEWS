@@ -164,5 +164,18 @@
         "ai_error_description": "Tidak dapat mengambil informasi yang didukung AI untuk {0}.",
         "data_error_title": "Kesalahan",
         "data_error_description": "Gagal memuat data {0}."
+    },
+     "nearby_alert": {
+        "title": "Peringatan Bahaya Terdekat",
+        "subtitle": "Status keamanan real-time Anda berdasarkan lokasi.",
+        "requesting_location": "Meminta lokasi Anda untuk menilai risiko terdekat...",
+        "permission_denied_title": "Akses Lokasi Ditolak",
+        "permission_denied_description": "Harap aktifkan layanan lokasi di browser Anda untuk menggunakan fitur Peringatan Bahaya Terdekat.",
+        "analyzing": "Menganalisis lokasi Anda terhadap data bencana terbaru...",
+        "at_risk_title": "PERINGATAN SEGERA",
+        "safe_title": "Anda Berada di Area Aman",
+        "safe_message": "Kami telah menganalisis lokasi Anda saat ini terhadap data terbaru dan tidak menemukan ancaman berisiko tinggi di sekitar Anda. Tetap waspada dan periksa kembali untuk pembaruan.",
+        "safety_first_recommendations": "Rekomendasi Keselamatan Utama",
+        "view_weather": "Lihat Prakiraan Cuaca Lengkap"
     }
 }

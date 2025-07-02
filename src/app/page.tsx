@@ -1,9 +1,9 @@
-import BogorWeatherWatch from '@/components/bogor-weather-watch';
+import NearbyAlert from '@/components/nearby-alert';
 
 export default function Home() {
   return (
     <main>
-      <BogorWeatherWatch />
+      <NearbyAlert />
     </main>
   );
 }
