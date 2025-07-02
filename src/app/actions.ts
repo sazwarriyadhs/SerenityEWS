@@ -11,6 +11,8 @@ import { getFireData, FireData } from "@/lib/fire";
 import { fireInfo, FireInfoInput, FireInfoOutput } from "@/ai/flows/fire-info";
 import { getWhirlwindData, WhirlwindData } from "@/lib/whirlwind";
 import { whirlwindInfo, WhirlwindInfoInput, WhirlwindInfoOutput } from "@/ai/flows/whirlwind-info";
+import { getVolcanoData, VolcanoData } from "@/lib/volcano";
+import { volcanoInfo, VolcanoInfoInput, VolcanoInfoOutput } from "@/ai/flows/volcano-info";
 
 export async function fetchWeatherData(location: Location): Promise<WeatherData> {
     return getWeatherData(location);
@@ -138,6 +140,31 @@ export async function fetchWhirlwindInfo(input: WhirlwindInfoInput): Promise<Whi
         return info;
     } catch (error) {
         console.error("Error fetching whirlwind info:", error);
+        if (error instanceof z.ZodError) {
+            console.error("Zod validation errors:", error.errors);
+        }
+        return null;
+    }
+}
+
+export async function fetchVolcanoData(): Promise<VolcanoData> {
+    return getVolcanoData();
+}
+
+const VolcanoInfoInputSchema = z.object({
+    name: z.string(),
+    status: z.string(),
+    lastEruption: z.string(),
+    recommendations: z.array(z.string()),
+});
+
+export async function fetchVolcanoInfo(input: VolcanoInfoInput): Promise<VolcanoInfoOutput | null> {
+    try {
+        const validatedInput = VolcanoInfoInputSchema.parse(input);
+        const info = await volcanoInfo(validatedInput);
+        return info;
+    } catch (error) {
+        console.error("Error fetching volcano info:", error);
         if (error instanceof z.ZodError) {
             console.error("Zod validation errors:", error.errors);
         }

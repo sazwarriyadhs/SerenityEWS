@@ -6,3 +6,4 @@ import '@/ai/flows/earthquake-info.ts';
 import '@/ai/flows/landslide-info.ts';
 import '@/ai/flows/fire-info.ts';
 import '@/ai/flows/whirlwind-info.ts';
+import '@/ai/flows/volcano-info.ts';

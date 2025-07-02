@@ -1,6 +1,6 @@
 'use client';
 
-import { CloudSun, Zap, Menu, Mountain, Flame, Tornado } from 'lucide-react';
+import { CloudSun, Zap, Menu, Mountain, Flame, Tornado, ArrowDownFromLine } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Button } from './ui/button';
@@ -11,9 +11,10 @@ import { useState } from 'react';
 const navItems = [
     { href: '/', label: 'Weather', icon: CloudSun },
     { href: '/earthquake', label: 'Earthquake', icon: Zap },
-    { href: '/landslide', label: 'Landslide', icon: Mountain },
+    { href: '/landslide', label: 'Landslide', icon: ArrowDownFromLine },
     { href: '/fire', label: 'Fire', icon: Flame },
-    { href: '/whirlwind', label: 'Whirlwind', icon: Tornado },
+    { href: '/whirlwind', 'label': 'Whirlwind', icon: Tornado },
+    { href: '/volcano', label: 'Volcano', icon: Mountain },
 ];
 
 export function AppHeader() {

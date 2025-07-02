@@ -6,7 +6,7 @@ import type { LandslideData } from '@/lib/landslide';
 import type { LandslideInfoOutput } from '@/ai/flows/landslide-info';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Mountain, MapPin, Clock, Lightbulb, AlertTriangle, SignalHigh, CloudRain, ClipboardList } from 'lucide-react';
+import { ArrowDownFromLine, MapPin, Clock, Lightbulb, AlertTriangle, SignalHigh, CloudRain, ClipboardList } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 function InfoCard({ icon: Icon, label, value, riskLevel }: { icon: React.ElementType, label: string, value: string | number, riskLevel?: 'High' | 'Moderate' | 'Low' }) {
@@ -82,7 +82,7 @@ export default function LandslidePage() {
         <div className="container mx-auto p-4 sm:p-6 md:p-8">
             <header className="mb-8">
                 <h1 className="text-3xl md:text-4xl font-bold text-primary flex items-center gap-3">
-                    <Mountain className="h-10 w-10" />
+                    <ArrowDownFromLine className="h-10 w-10" />
                     <span>Landslide Watch</span>
                 </h1>
                 <p className="text-muted-foreground mt-2">Latest landslide risk information and safety tips for the Bogor area.</p>
