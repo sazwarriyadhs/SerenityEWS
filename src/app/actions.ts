@@ -13,6 +13,8 @@ import { getWhirlwindData, WhirlwindData } from "@/lib/whirlwind";
 import { whirlwindInfo, WhirlwindInfoInput, WhirlwindInfoOutput } from "@/ai/flows/whirlwind-info";
 import { getVolcanoData, VolcanoData } from "@/lib/volcano";
 import { volcanoInfo, VolcanoInfoInput, VolcanoInfoOutput } from "@/ai/flows/volcano-info";
+import { getFloodData, FloodData } from "@/lib/flood";
+import { floodInfo, FloodInfoInput, FloodInfoOutput } from "@/ai/flows/flood-info";
 
 type Language = 'en' | 'id';
 
@@ -167,6 +169,31 @@ export async function fetchVolcanoInfo(input: z.infer<typeof VolcanoInfoInputCli
         return info;
     } catch (error) {
         console.error("Error fetching volcano info:", error);
+        if (error instanceof z.ZodError) {
+            console.error("Zod validation errors:", error.errors);
+        }
+        return null;
+    }
+}
+
+export async function fetchFloodData(): Promise<FloodData> {
+    return getFloodData();
+}
+
+const FloodInfoInputClientSchema = z.object({
+    location: z.string(),
+    waterLevel: z.number(),
+    status: z.string(),
+    time: z.string(),
+});
+
+export async function fetchFloodInfo(input: z.infer<typeof FloodInfoInputClientSchema>, lang: Language): Promise<FloodInfoOutput | null> {
+    try {
+        const validatedInput = FloodInfoInputClientSchema.parse(input);
+        const info = await floodInfo({ ...validatedInput, language: lang === 'en' ? 'English' : 'Indonesian' });
+        return info;
+    } catch (error) {
+        console.error("Error fetching flood info:", error);
         if (error instanceof z.ZodError) {
             console.error("Zod validation errors:", error.errors);
         }

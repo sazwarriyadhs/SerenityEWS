@@ -8,7 +8,8 @@
         "landslide": "Tanah Longsor",
         "fire": "Kebakaran",
         "whirlwind": "Angin Puyuh",
-        "volcano": "Gunung Berapi"
+        "volcano": "Gunung Berapi",
+        "flood": "Banjir"
     },
     "weather": {
         "title": "Pantau Cuaca",
@@ -107,6 +108,20 @@
         "safety_precautions": "Tindakan Pencegahan",
         "no_ai_info": "Informasi AI tidak tersedia.",
         "footer": "Data bersumber dari magma.vsi.esdm.go.id (untuk tujuan demonstrasi). Didukung oleh AI."
+    },
+    "flood": {
+        "title": "Monitor Banjir & Bendungan",
+        "subtitle": "Informasi tinggi muka air Bendungan Katulampa dan peringatan keamanan.",
+        "dam_status": "Status Bendungan Katulampa",
+        "water_level": "Tinggi Muka Air",
+        "status": "Status",
+        "last_update": "Pembaruan Terakhir",
+        "location": "Lokasi",
+        "ai_summary_recommendations": "Ringkasan & Rekomendasi AI",
+        "summary": "Ringkasan",
+        "safety_recommendations": "Rekomendasi Keamanan",
+        "no_ai_info": "Informasi AI tidak tersedia.",
+        "footer": "Data bersumber dari poskobanjir.dsdadki.web.id (untuk tujuan demonstrasi). Didukung oleh AI."
     },
     "language": {
         "english": "Bahasa Inggris",

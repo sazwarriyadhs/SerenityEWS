@@ -8,7 +8,8 @@
         "landslide": "Landslide",
         "fire": "Fire",
         "whirlwind": "Whirlwind",
-        "volcano": "Volcano"
+        "volcano": "Volcano",
+        "flood": "Flood"
     },
     "weather": {
         "title": "Weather Watch",
@@ -107,6 +108,20 @@
         "safety_precautions": "Safety Precautions",
         "no_ai_info": "No AI information available.",
         "footer": "Data sourced from magma.vsi.esdm.go.id (for demonstration purposes). Powered by AI."
+    },
+    "flood": {
+        "title": "Flood & Dam Monitor",
+        "subtitle": "Latest water level information from Katulampa Dam and safety alerts.",
+        "dam_status": "Katulampa Dam Status",
+        "water_level": "Water Level",
+        "status": "Status",
+        "last_update": "Last Update",
+        "location": "Location",
+        "ai_summary_recommendations": "AI Summary & Recommendations",
+        "summary": "Summary",
+        "safety_recommendations": "Safety Recommendations",
+        "no_ai_info": "No AI information available.",
+        "footer": "Data sourced from poskobanjir.dsdadki.web.id (for demonstration purposes). Powered by AI."
     },
     "language": {
         "english": "English",
