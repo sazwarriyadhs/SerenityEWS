@@ -17,6 +17,7 @@ const WhirlwindInfoInputSchema = z.object({
     windSpeed: z.number().describe('The maximum sustained wind speed in kilometers per hour.'),
     time: z.string().describe('The time the data was last updated.'),
     potentialThreat: z.string().describe('The potential threats associated with the storm.'),
+    language: z.enum(['Indonesian', 'English']).describe('The language for the AI-generated response.'),
 });
 export type WhirlwindInfoInput = z.infer<typeof WhirlwindInfoInputSchema>;
 
@@ -43,6 +44,7 @@ const prompt = ai.definePrompt({
 
 Based on this data, provide a concise summary of the situation.
 Then, generate a list of essential safety recommendations for people in the potential path of the storm. The tips should be clear, practical, and prioritize immediate actions like securing property and preparing for potential evacuation.
+Generate the entire response in {{{language}}}.
 `,
 });
 

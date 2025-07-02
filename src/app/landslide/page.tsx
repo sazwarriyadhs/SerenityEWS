@@ -8,15 +8,18 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { ArrowDownFromLine, MapPin, Clock, Lightbulb, AlertTriangle, SignalHigh, CloudRain, ClipboardList } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { useLanguage } from '@/contexts/language-context';
 
-function InfoCard({ icon: Icon, label, value, riskLevel }: { icon: React.ElementType, label: string, value: string | number, riskLevel?: 'High' | 'Moderate' | 'Low' }) {
-    const riskColor = riskLevel === 'High' ? 'text-destructive' : riskLevel === 'Moderate' ? 'text-accent' : 'text-primary';
+function InfoCard({ icon: Icon, label, value, riskLevel }: { icon: React.ElementType, label: string, value: string | number, riskLevel?: 'High' | 'Moderate' | 'Low' | 'Tinggi' | 'Sedang' | 'Rendah' }) {
+    const isHigh = riskLevel === 'High' || riskLevel === 'Tinggi';
+    const isModerate = riskLevel === 'Moderate' || riskLevel === 'Sedang';
+    const riskColor = isHigh ? 'text-destructive' : isModerate ? 'text-accent' : 'text-primary';
     return (
         <div className="flex items-center gap-4 rounded-lg bg-secondary/50 p-4">
-            <Icon className={`h-8 w-8 ${label === 'Risk Level' ? riskColor : 'text-primary'}`} />
+            <Icon className={`h-8 w-8 ${label === 'Risk Level' || label === 'Tingkat Risiko' ? riskColor : 'text-primary'}`} />
             <div>
                 <p className="text-sm text-muted-foreground">{label}</p>
-                <p className={`text-lg font-bold ${label === 'Risk Level' ? riskColor : ''}`}>{value}</p>
+                <p className={`text-lg font-bold ${label === 'Risk Level' || label === 'Tingkat Risiko' ? riskColor : ''}`}>{value}</p>
             </div>
         </div>
     );
@@ -39,6 +42,7 @@ export default function LandslidePage() {
     const [aiInfo, setAiInfo] = useState<LandslideInfoOutput | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const { toast } = useToast();
+    const { language, t } = useLanguage();
 
     useEffect(() => {
         async function loadData() {
@@ -53,46 +57,46 @@ export default function LandslidePage() {
                     trigger: data.trigger,
                     time: data.time,
                     potentialImpact: data.potentialImpact
-                });
+                }, language);
 
                 if(info) {
                     setAiInfo(info);
                 } else {
                     toast({
                         variant: "destructive",
-                        title: "AI Error",
-                        description: "Could not fetch AI-powered landslide information.",
+                        title: t('errors.ai_error_title'),
+                        description: t('errors.ai_error_description', t('nav.landslide').toLowerCase()),
                     });
                 }
             } catch (error) {
                 console.error("Failed to load landslide data", error);
                 toast({
                     variant: "destructive",
-                    title: "Error",
-                    description: "Failed to load landslide data.",
+                    title: t('errors.data_error_title'),
+                    description: t('errors.data_error_description', t('nav.landslide').toLowerCase()),
                 });
             } finally {
                 setIsLoading(false);
             }
         }
         loadData();
-    }, [toast]);
+    }, [toast, language, t]);
 
     return (
         <div className="container mx-auto p-4 sm:p-6 md:p-8">
             <header className="mb-8">
                 <h1 className="text-3xl md:text-4xl font-bold text-primary flex items-center gap-3">
                     <ArrowDownFromLine className="h-10 w-10" />
-                    <span>Landslide Watch</span>
+                    <span>{t('landslide.title')}</span>
                 </h1>
-                <p className="text-muted-foreground mt-2">Latest landslide risk information and safety tips for the Bogor area.</p>
+                <p className="text-muted-foreground mt-2">{t('landslide.subtitle')}</p>
             </header>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <Card>
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2 text-2xl">
-                           <AlertTriangle className="text-destructive"/> Current Risk Assessment
+                           <AlertTriangle className="text-destructive"/> {t('landslide.current_risk')}
                         </CardTitle>
                     </CardHeader>
                     <CardContent className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -106,11 +110,11 @@ export default function LandslidePage() {
                             </>
                         ) : landslideData && (
                             <>
-                                <InfoCard icon={SignalHigh} label="Risk Level" value={landslideData.riskLevel} riskLevel={landslideData.riskLevel} />
-                                <InfoCard icon={MapPin} label="Location" value={landslideData.location} />
-                                <InfoCard icon={CloudRain} label="Primary Trigger" value={landslideData.trigger} />
-                                <InfoCard icon={Clock} label="Assessment Time" value={landslideData.time} />
-                                <InfoCard icon={ClipboardList} label="Potential Impact" value={landslideData.potentialImpact} />
+                                <InfoCard icon={SignalHigh} label={t('landslide.risk_level')} value={landslideData.riskLevel} riskLevel={landslideData.riskLevel} />
+                                <InfoCard icon={MapPin} label={t('landslide.location')} value={landslideData.location} />
+                                <InfoCard icon={CloudRain} label={t('landslide.trigger')} value={landslideData.trigger} />
+                                <InfoCard icon={Clock} label={t('landslide.assessment_time')} value={landslideData.time} />
+                                <InfoCard icon={ClipboardList} label={t('landslide.potential_impact')} value={landslideData.potentialImpact} />
                             </>
                         )}
                     </CardContent>
@@ -119,7 +123,7 @@ export default function LandslidePage() {
                 <Card>
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2 text-2xl">
-                           <Lightbulb className="text-primary"/> AI Summary & Safety Tips
+                           <Lightbulb className="text-primary"/> {t('landslide.ai_summary_tips')}
                         </CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4">
@@ -134,24 +138,24 @@ export default function LandslidePage() {
                         ) : aiInfo ? (
                             <>
                                 <div>
-                                    <h3 className="font-semibold mb-2">Summary</h3>
+                                    <h3 className="font-semibold mb-2">{t('landslide.summary')}</h3>
                                     <p className="text-muted-foreground italic border-l-2 border-primary pl-3">{aiInfo.summary}</p>
                                 </div>
                                 <div>
-                                    <h3 className="font-semibold mb-2">Safety Recommendations</h3>
+                                    <h3 className="font-semibold mb-2">{t('landslide.safety_recommendations')}</h3>
                                     <ul className="space-y-2 list-disc list-inside text-muted-foreground">
                                         {aiInfo.safety_recommendations.map((tip, index) => <li key={index}>{tip}</li>)}
                                     </ul>
                                 </div>
                             </>
                         ) : (
-                             <p className="text-muted-foreground">No AI information available.</p>
+                             <p className="text-muted-foreground">{t('landslide.no_ai_info')}</p>
                         )}
                     </CardContent>
                 </Card>
             </div>
             <footer className="text-center mt-12 text-muted-foreground text-sm">
-                <p>Data bersumber dari gis.bnpb.go.id (untuk tujuan demonstrasi). Didukung oleh AI.</p>
+                <p>{t('landslide.footer')}</p>
             </footer>
         </div>
     );

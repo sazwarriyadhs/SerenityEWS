@@ -22,6 +22,7 @@ const WeatherRecommendationsInputSchema = z.object({
       condition: z.string().describe('The weather condition for the day (e.g., sunny, cloudy, rainy).'),
     })
   ).length(3).describe('A 3-day weather forecast for the specified location.'),
+  language: z.enum(['Indonesian', 'English']).describe('The language for the AI-generated response.'),
 });
 export type WeatherRecommendationsInput = z.infer<typeof WeatherRecommendationsInputSchema>;
 
@@ -55,6 +56,7 @@ const prompt = ai.definePrompt({
   Each object in the recommendations array must contain an "activity", a "clothing" and a "justification" field.
   The length of array must be 3, corresponding to the 3-day forecast above.
   Each "justification" should reference specific weather conditions in the forecast that support the recommendation.
+  Generate the entire response in {{{language}}}.
 `,
 });
 

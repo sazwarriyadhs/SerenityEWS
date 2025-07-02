@@ -8,7 +8,7 @@ export interface EarthquakeData {
 
 const getFormattedTime = () => {
     const date = new Date();
-    return date.toLocaleString('en-US', {
+    return date.toLocaleString('en-GB', {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
@@ -20,10 +20,10 @@ const getFormattedTime = () => {
 
 const mockEarthquakeData: EarthquakeData = {
   magnitude: 4.8,
-  location: 'Laut Jawa, 90 km Utara Jakarta',
+  location: 'Java Sea, 90 km North of Jakarta',
   depth: 22,
   time: getFormattedTime(),
-  epicenter: 'Laut Jawa'
+  epicenter: 'Java Sea'
 };
 
 export const getEarthquakeData = async (): Promise<EarthquakeData> => {

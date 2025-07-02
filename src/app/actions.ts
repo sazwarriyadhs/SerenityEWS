@@ -14,11 +14,13 @@ import { whirlwindInfo, WhirlwindInfoInput, WhirlwindInfoOutput } from "@/ai/flo
 import { getVolcanoData, VolcanoData } from "@/lib/volcano";
 import { volcanoInfo, VolcanoInfoInput, VolcanoInfoOutput } from "@/ai/flows/volcano-info";
 
-export async function fetchWeatherData(location: Location): Promise<WeatherData> {
-    return getWeatherData(location);
+type Language = 'en' | 'id';
+
+export async function fetchWeatherData(location: Location, lang: Language): Promise<WeatherData> {
+    return getWeatherData(location, lang);
 }
 
-const WeatherRecommendationsInputSchema = z.object({
+const WeatherRecommendationsInputClientSchema = z.object({
   location: z.enum(['city', 'regency']),
   forecast: z.array(
     z.object({
@@ -30,10 +32,10 @@ const WeatherRecommendationsInputSchema = z.object({
   ).length(3),
 });
 
-export async function fetchAIRecommendations(input: WeatherRecommendationsInput): Promise<WeatherRecommendationsOutput | null> {
+export async function fetchAIRecommendations(input: z.infer<typeof WeatherRecommendationsInputClientSchema>, lang: Language): Promise<WeatherRecommendationsOutput | null> {
     try {
-        const validatedInput = WeatherRecommendationsInputSchema.parse(input);
-        const recommendations = await weatherRecommendations(validatedInput);
+        const validatedInput = WeatherRecommendationsInputClientSchema.parse(input);
+        const recommendations = await weatherRecommendations({ ...validatedInput, language: lang === 'en' ? 'English' : 'Indonesian' });
         return recommendations;
     } catch (error) {
         console.error("Error fetching AI recommendations:", error);
@@ -48,17 +50,17 @@ export async function fetchEarthquakeData(): Promise<EarthquakeData> {
     return getEarthquakeData();
 }
 
-const EarthquakeInfoInputSchema = z.object({
+const EarthquakeInfoInputClientSchema = z.object({
     magnitude: z.number(),
     location: z.string(),
     depth: z.number(),
     time: z.string(),
 });
 
-export async function fetchEarthquakeInfo(input: EarthquakeInfoInput): Promise<EarthquakeInfoOutput | null> {
+export async function fetchEarthquakeInfo(input: z.infer<typeof EarthquakeInfoInputClientSchema>, lang: Language): Promise<EarthquakeInfoOutput | null> {
     try {
-        const validatedInput = EarthquakeInfoInputSchema.parse(input);
-        const info = await earthquakeInfo(validatedInput);
+        const validatedInput = EarthquakeInfoInputClientSchema.parse(input);
+        const info = await earthquakeInfo({ ...validatedInput, language: lang === 'en' ? 'English' : 'Indonesian' });
         return info;
     } catch (error) {
         console.error("Error fetching earthquake info:", error);
@@ -73,7 +75,7 @@ export async function fetchLandslideData(): Promise<LandslideData> {
     return getLandslideData();
 }
 
-const LandslideInfoInputSchema = z.object({
+const LandslideInfoInputClientSchema = z.object({
     location: z.string(),
     riskLevel: z.string(),
     trigger: z.string(),
@@ -81,10 +83,10 @@ const LandslideInfoInputSchema = z.object({
     potentialImpact: z.string(),
 });
 
-export async function fetchLandslideInfo(input: LandslideInfoInput): Promise<LandslideInfoOutput | null> {
+export async function fetchLandslideInfo(input: z.infer<typeof LandslideInfoInputClientSchema>, lang: Language): Promise<LandslideInfoOutput | null> {
     try {
-        const validatedInput = LandslideInfoInputSchema.parse(input);
-        const info = await landslideInfo(validatedInput);
+        const validatedInput = LandslideInfoInputClientSchema.parse(input);
+        const info = await landslideInfo({ ...validatedInput, language: lang === 'en' ? 'English' : 'Indonesian' });
         return info;
     } catch (error) {
         console.error("Error fetching landslide info:", error);
@@ -99,7 +101,7 @@ export async function fetchFireData(): Promise<FireData> {
     return getFireData();
 }
 
-const FireInfoInputSchema = z.object({
+const FireInfoInputClientSchema = z.object({
     location: z.string(),
     status: z.string(),
     type: z.string(),
@@ -107,10 +109,10 @@ const FireInfoInputSchema = z.object({
     cause: z.string(),
 });
 
-export async function fetchFireInfo(input: FireInfoInput): Promise<FireInfoOutput | null> {
+export async function fetchFireInfo(input: z.infer<typeof FireInfoInputClientSchema>, lang: Language): Promise<FireInfoOutput | null> {
     try {
-        const validatedInput = FireInfoInputSchema.parse(input);
-        const info = await fireInfo(validatedInput);
+        const validatedInput = FireInfoInputClientSchema.parse(input);
+        const info = await fireInfo({ ...validatedInput, language: lang === 'en' ? 'English' : 'Indonesian' });
         return info;
     } catch (error) {
         console.error("Error fetching fire info:", error);
@@ -125,7 +127,7 @@ export async function fetchWhirlwindData(): Promise<WhirlwindData> {
     return getWhirlwindData();
 }
 
-const WhirlwindInfoInputSchema = z.object({
+const WhirlwindInfoInputClientSchema = z.object({
     location: z.string(),
     category: z.string(),
     windSpeed: z.number(),
@@ -133,10 +135,10 @@ const WhirlwindInfoInputSchema = z.object({
     potentialThreat: z.string(),
 });
 
-export async function fetchWhirlwindInfo(input: WhirlwindInfoInput): Promise<WhirlwindInfoOutput | null> {
+export async function fetchWhirlwindInfo(input: z.infer<typeof WhirlwindInfoInputClientSchema>, lang: Language): Promise<WhirlwindInfoOutput | null> {
     try {
-        const validatedInput = WhirlwindInfoInputSchema.parse(input);
-        const info = await whirlwindInfo(validatedInput);
+        const validatedInput = WhirlwindInfoInputClientSchema.parse(input);
+        const info = await whirlwindInfo({ ...validatedInput, language: lang === 'en' ? 'English' : 'Indonesian' });
         return info;
     } catch (error) {
         console.error("Error fetching whirlwind info:", error);
@@ -151,17 +153,17 @@ export async function fetchVolcanoData(): Promise<VolcanoData> {
     return getVolcanoData();
 }
 
-const VolcanoInfoInputSchema = z.object({
+const VolcanoInfoInputClientSchema = z.object({
     name: z.string(),
     status: z.string(),
     lastEruption: z.string(),
     recommendations: z.array(z.string()),
 });
 
-export async function fetchVolcanoInfo(input: VolcanoInfoInput): Promise<VolcanoInfoOutput | null> {
+export async function fetchVolcanoInfo(input: z.infer<typeof VolcanoInfoInputClientSchema>, lang: Language): Promise<VolcanoInfoOutput | null> {
     try {
-        const validatedInput = VolcanoInfoInputSchema.parse(input);
-        const info = await volcanoInfo(validatedInput);
+        const validatedInput = VolcanoInfoInputClientSchema.parse(input);
+        const info = await volcanoInfo({ ...validatedInput, language: lang === 'en' ? 'English' : 'Indonesian' });
         return info;
     } catch (error) {
         console.error("Error fetching volcano info:", error);

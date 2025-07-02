@@ -1,0 +1,121 @@
+{
+    "header": {
+        "title": "Bogor Info Hub"
+    },
+    "nav": {
+        "weather": "Weather",
+        "earthquake": "Earthquake",
+        "landslide": "Landslide",
+        "fire": "Fire",
+        "whirlwind": "Whirlwind",
+        "volcano": "Volcano"
+    },
+    "weather": {
+        "title": "Weather Watch",
+        "city": "Bogor City",
+        "regency": "Bogor Regency",
+        "current_weather_in": "Current Weather in {0}",
+        "humidity": "Humidity",
+        "forecast_7_day": "7-Day Forecast",
+        "today": "Today",
+        "ai_recommendations": "AI Recommendations",
+        "recommendation_for_day": "Recommendation for Day {0}",
+        "activity": "Activity",
+        "clothing": "Clothing",
+        "justification": "Justification",
+        "no_recommendations": "No recommendations available at the moment.",
+        "footer": "Weather data for demonstration purposes. Powered by AI.",
+        "condition": {
+            "sunny": "Sunny",
+            "partly_cloudy": "Partly Cloudy",
+            "cloudy": "Cloudy",
+            "rainy": "Rainy",
+            "rain": "Rain",
+            "snow": "Snow"
+        }
+    },
+    "earthquake": {
+        "title": "Earthquake Monitor",
+        "subtitle": "Latest earthquake information and safety tips for the Bogor area.",
+        "latest_event": "Latest Event Details",
+        "magnitude": "Magnitude",
+        "location": "Location",
+        "depth": "Depth",
+        "time": "Time",
+        "ai_summary_tips": "AI Summary & Safety Tips",
+        "summary": "Summary",
+        "safety_tips": "Safety Tips",
+        "no_ai_info": "No AI information available.",
+        "footer": "Data sourced from gis.bnpb.go.id (for demonstration purposes). Powered by AI."
+    },
+    "landslide": {
+        "title": "Landslide Watch",
+        "subtitle": "Latest landslide risk information and safety tips for the Bogor area.",
+        "current_risk": "Current Risk Assessment",
+        "risk_level": "Risk Level",
+        "location": "Location",
+        "trigger": "Primary Trigger",
+        "assessment_time": "Assessment Time",
+        "potential_impact": "Potential Impact",
+        "ai_summary_tips": "AI Summary & Safety Tips",
+        "summary": "Summary",
+        "safety_recommendations": "Safety Recommendations",
+        "no_ai_info": "No AI information available.",
+        "footer": "Data sourced from gis.bnpb.go.id (for demonstration purposes). Powered by AI."
+    },
+    "fire": {
+        "title": "Fire Report",
+        "subtitle": "Latest fire incident information and safety alerts for the Bogor area.",
+        "incident_details": "Incident Details",
+        "status": "Status",
+        "location": "Location",
+        "type": "Type",
+        "report_time": "Report Time",
+        "cause": "Suspected Cause",
+        "ai_summary_alerts": "AI Summary & Safety Alerts",
+        "summary": "Summary",
+        "safety_recommendations": "Safety Recommendations",
+        "no_ai_info": "No AI information available.",
+        "footer": "Data sourced from gis.bnpb.go.id (for demonstration purposes). Powered by AI."
+    },
+    "whirlwind": {
+        "title": "Whirlwind & Typhoon Watch",
+        "subtitle": "Latest storm information and safety alerts for the Bogor area.",
+        "storm_details": "Storm Details",
+        "category": "Category",
+        "location": "Location",
+        "wind_speed": "Wind Speed",
+        "last_update": "Last Update",
+        "potential_threat": "Potential Threat",
+        "ai_summary_alerts": "AI Summary & Safety Alerts",
+        "summary": "Summary",
+        "safety_recommendations": "Safety Recommendations",
+        "no_ai_info": "No AI information available.",
+        "footer": "Data sourced from gis.bnpb.go.id (for demonstration purposes). Powered by AI."
+    },
+    "volcano": {
+        "title": "Volcano Activity Monitor",
+        "subtitle": "Latest volcano status and safety alerts.",
+        "current_status": "Current Status: {0}",
+        "status": "Status",
+        "volcano": "Volcano",
+        "latest_update": "Latest Update",
+        "official_recommendations": "Official Recommendations",
+        "no_recommendations": "No recommendations available.",
+        "ai_summary_precautions": "AI Summary & Safety Precautions",
+        "summary": "Summary",
+        "safety_precautions": "Safety Precautions",
+        "no_ai_info": "No AI information available.",
+        "footer": "Data sourced from magma.vsi.esdm.go.id (for demonstration purposes). Powered by AI."
+    },
+    "language": {
+        "english": "English",
+        "indonesian": "Indonesian"
+    },
+    "errors": {
+        "ai_error_title": "AI Error",
+        "ai_error_description": "Could not fetch AI-powered information for {0}.",
+        "data_error_title": "Error",
+        "data_error_description": "Failed to load {0} data."
+    }
+}

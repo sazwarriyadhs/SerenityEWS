@@ -8,7 +8,7 @@ export interface WhirlwindData {
 
 const getFormattedTime = () => {
     const date = new Date();
-    return date.toLocaleString('en-US', {
+    return date.toLocaleString('en-GB', {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
@@ -19,11 +19,11 @@ const getFormattedTime = () => {
 }
 
 const mockWhirlwindData: WhirlwindData = {
-  location: 'Perairan Selatan Jawa Barat',
-  category: 'Siklon Tropis "Cempaka"',
+  location: 'Southern Waters of West Java',
+  category: 'Tropical Cyclone "Cempaka"',
   windSpeed: 95,
   time: getFormattedTime(),
-  potentialThreat: 'Potensi angin kencang dan hujan lebat.'
+  potentialThreat: 'Potential for strong winds and heavy rain.'
 };
 
 export const getWhirlwindData = async (): Promise<WhirlwindData> => {

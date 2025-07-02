@@ -8,7 +8,7 @@ export interface VolcanoData {
 const getFormattedTime = () => {
     const date = new Date();
     date.setDate(date.getDate() - 30); // Set activity to about a month ago
-    return date.toLocaleString('id-ID', {
+    return date.toLocaleString('en-GB', {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
@@ -16,13 +16,13 @@ const getFormattedTime = () => {
 }
 
 const mockVolcanoData: VolcanoData = {
-  name: 'Gunung Salak',
+  name: 'Mount Salak',
   status: 'Level I (Normal)',
-  lastEruption: `Letusan terakhir terkonfirmasi pada 1938. Aktivitas minor terpantau pada ${getFormattedTime()}`,
+  lastEruption: `Last confirmed eruption in 1938. Minor activity observed on ${getFormattedTime()}`,
   recommendations: [
-    'Aktivitas vulkanik pada tingkat normal.',
-    'Masyarakat dan wisatawan dihimbau untuk tidak mendekati kawah dalam radius 1 km.',
-    'Tetap waspada dan ikuti informasi dari sumber resmi.',
+    'Volcanic activity is at a normal level.',
+    'Public and tourists are advised not to approach the crater within a 1 km radius.',
+    'Stay alert and follow information from official sources.',
   ]
 };
 

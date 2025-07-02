@@ -1,0 +1,121 @@
+{
+    "header": {
+        "title": "Pusat Info Bogor"
+    },
+    "nav": {
+        "weather": "Cuaca",
+        "earthquake": "Gempa Bumi",
+        "landslide": "Tanah Longsor",
+        "fire": "Kebakaran",
+        "whirlwind": "Angin Puyuh",
+        "volcano": "Gunung Berapi"
+    },
+    "weather": {
+        "title": "Pantau Cuaca",
+        "city": "Kota Bogor",
+        "regency": "Kabupaten Bogor",
+        "current_weather_in": "Cuaca Saat Ini di {0}",
+        "humidity": "Kelembapan",
+        "forecast_7_day": "Prakiraan 7 Hari",
+        "today": "Hari ini",
+        "ai_recommendations": "Rekomendasi AI",
+        "recommendation_for_day": "Rekomendasi Hari ke-{0}",
+        "activity": "Aktivitas",
+        "clothing": "Pakaian",
+        "justification": "Alasan",
+        "no_recommendations": "Rekomendasi tidak tersedia saat ini.",
+        "footer": "Data cuaca untuk tujuan demonstrasi. Didukung oleh AI.",
+        "condition": {
+            "sunny": "Cerah",
+            "partly_cloudy": "Cerah Berawan",
+            "cloudy": "Berawan",
+            "rainy": "Hujan",
+            "rain": "Hujan",
+            "snow": "Salju"
+        }
+    },
+    "earthquake": {
+        "title": "Monitor Gempa Bumi",
+        "subtitle": "Informasi gempa bumi terkini dan tips keamanan untuk wilayah Bogor.",
+        "latest_event": "Detail Kejadian Terkini",
+        "magnitude": "Magnitudo",
+        "location": "Lokasi",
+        "depth": "Kedalaman",
+        "time": "Waktu",
+        "ai_summary_tips": "Ringkasan &amp; Tips Keamanan AI",
+        "summary": "Ringkasan",
+        "safety_tips": "Tips Keamanan",
+        "no_ai_info": "Informasi AI tidak tersedia.",
+        "footer": "Data bersumber dari gis.bnpb.go.id (untuk tujuan demonstrasi). Didukung oleh AI."
+    },
+    "landslide": {
+        "title": "Peringatan Tanah Longsor",
+        "subtitle": "Informasi risiko tanah longsor terkini dan tips keamanan untuk wilayah Bogor.",
+        "current_risk": "Penilaian Risiko Saat Ini",
+        "risk_level": "Tingkat Risiko",
+        "location": "Lokasi",
+        "trigger": "Pemicu Utama",
+        "assessment_time": "Waktu Penilaian",
+        "potential_impact": "Potensi Dampak",
+        "ai_summary_tips": "Ringkasan &amp; Tips Keamanan AI",
+        "summary": "Ringkasan",
+        "safety_recommendations": "Rekomendasi Keamanan",
+        "no_ai_info": "Informasi AI tidak tersedia.",
+        "footer": "Data bersumber dari gis.bnpb.go.id (untuk tujuan demonstrasi). Didukung oleh AI."
+    },
+    "fire": {
+        "title": "Laporan Kebakaran",
+        "subtitle": "Informasi insiden kebakaran terkini dan peringatan keamanan untuk wilayah Bogor.",
+        "incident_details": "Detail Insiden",
+        "status": "Status",
+        "location": "Lokasi",
+        "type": "Jenis",
+        "report_time": "Waktu Laporan",
+        "cause": "Dugaan Penyebab",
+        "ai_summary_alerts": "Ringkasan &amp; Peringatan Keamanan AI",
+        "summary": "Ringkasan",
+        "safety_recommendations": "Rekomendasi Keamanan",
+        "no_ai_info": "Informasi AI tidak tersedia.",
+        "footer": "Data bersumber dari gis.bnpb.go.id (untuk tujuan demonstrasi). Didukung oleh AI."
+    },
+    "whirlwind": {
+        "title": "Peringatan Angin Puyuh &amp; Topan",
+        "subtitle": "Informasi badai terkini dan peringatan keamanan untuk wilayah Bogor.",
+        "storm_details": "Detail Badai",
+        "category": "Kategori",
+        "location": "Lokasi",
+        "wind_speed": "Kecepatan Angin",
+        "last_update": "Pembaruan Terakhir",
+        "potential_threat": "Potensi Ancaman",
+        "ai_summary_alerts": "Ringkasan &amp; Peringatan Keamanan AI",
+        "summary": "Ringkasan",
+        "safety_recommendations": "Rekomendasi Keamanan",
+        "no_ai_info": "Informasi AI tidak tersedia.",
+        "footer": "Data bersumber dari gis.bnpb.go.id (untuk tujuan demonstrasi). Didukung oleh AI."
+    },
+    "volcano": {
+        "title": "Monitor Aktivitas Gunung Berapi",
+        "subtitle": "Status gunung berapi dan peringatan keamanan terkini.",
+        "current_status": "Status Saat Ini: {0}",
+        "status": "Status",
+        "volcano": "Gunung Berapi",
+        "latest_update": "Pembaruan Terakhir",
+        "official_recommendations": "Rekomendasi Resmi",
+        "no_recommendations": "Rekomendasi tidak tersedia.",
+        "ai_summary_precautions": "Ringkasan &amp; Tindakan Pencegahan AI",
+        "summary": "Ringkasan",
+        "safety_precautions": "Tindakan Pencegahan",
+        "no_ai_info": "Informasi AI tidak tersedia.",
+        "footer": "Data bersumber dari magma.vsi.esdm.go.id (untuk tujuan demonstrasi). Didukung oleh AI."
+    },
+    "language": {
+        "english": "Bahasa Inggris",
+        "indonesian": "Bahasa Indonesia"
+    },
+    "errors": {
+        "ai_error_title": "Kesalahan AI",
+        "ai_error_description": "Tidak dapat mengambil informasi yang didukung AI untuk {0}.",
+        "data_error_title": "Kesalahan",
+        "data_error_description": "Gagal memuat data {0}."
+    }
+}

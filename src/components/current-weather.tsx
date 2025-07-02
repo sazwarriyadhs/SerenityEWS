@@ -5,6 +5,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import type { CurrentWeather as CurrentWeatherType } from "@/lib/weather";
 import { WeatherIcon } from "./weather-icon";
 import { Droplets, Wind } from "lucide-react";
+import { useLanguage } from "@/contexts/language-context";
 
 interface CurrentWeatherProps {
     current: CurrentWeatherType | undefined;
@@ -12,6 +13,7 @@ interface CurrentWeatherProps {
 }
 
 export default function CurrentWeather({ current, isLoading }: CurrentWeatherProps) {
+    const { t } = useLanguage();
 
     if (isLoading || !current) {
         return (
@@ -45,7 +47,7 @@ export default function CurrentWeather({ current, isLoading }: CurrentWeatherPro
     return (
         <Card className="w-full shadow-lg border-2 border-primary/20 bg-card/80 backdrop-blur-sm">
             <CardHeader>
-                <CardTitle className="text-2xl text-primary font-bold">Current Weather in {current.locationName}</CardTitle>
+                <CardTitle className="text-2xl text-primary font-bold">{t('weather.current_weather_in', current.locationName)}</CardTitle>
             </CardHeader>
             <CardContent className="flex flex-col sm:flex-row items-center justify-between gap-8">
                 <div className="flex items-center gap-4 sm:gap-6">
@@ -59,7 +61,7 @@ export default function CurrentWeather({ current, isLoading }: CurrentWeatherPro
                     <div className="flex flex-col items-center gap-1">
                         <Droplets className="w-6 h-6 text-primary" />
                         <span className="font-bold">{current.humidity}%</span>
-                        <span className="text-sm text-muted-foreground">Humidity</span>
+                        <span className="text-sm text-muted-foreground">{t('weather.humidity')}</span>
                     </div>
                     <div className="flex flex-col items-center gap-1">
                         <Wind className="w-6 h-6 text-primary" />

@@ -9,6 +9,7 @@ import CurrentWeather from './current-weather';
 import SevenDayForecast from './seven-day-forecast';
 import AiRecommendations from './ai-recommendations';
 import { useToast } from '@/hooks/use-toast';
+import { useLanguage } from '@/contexts/language-context';
 
 const setCookie = (name: string, value: string, days: number) => {
   let expires = "";
@@ -41,13 +42,17 @@ export default function BogorWeatherWatch() {
     const [isPending, startTransition] = useTransition();
     const [isRecommendationsLoading, setRecommendationsLoading] = useState(true);
     const { toast } = useToast();
+    const { language, t } = useLanguage();
 
     useEffect(() => {
         const savedLocation = getCookie('bogor-weather-location') as Location;
         const initialLocation = savedLocation || 'city';
         setLocation(initialLocation);
-        loadData(initialLocation, true);
     }, []);
+
+    useEffect(() => {
+        loadData(location, true);
+    }, [location, language]);
 
     useEffect(() => {
         if (weatherData?.forecast) {
@@ -64,33 +69,33 @@ export default function BogorWeatherWatch() {
                 forecast: threeDayForecast
             };
 
-            fetchAIRecommendations(input).then(res => {
+            fetchAIRecommendations(input, language).then(res => {
                 if(res) {
                     setRecommendations(res);
                 } else {
                     toast({
                         variant: "destructive",
-                        title: "AI Error",
-                        description: "Could not fetch AI recommendations.",
+                        title: t('errors.ai_error_title'),
+                        description: t('errors.ai_error_description', t('nav.weather').toLowerCase()),
                     })
                 }
             }).finally(() => {
                 setRecommendationsLoading(false);
             });
         }
-    }, [weatherData, location, toast]);
+    }, [weatherData, location, toast, language, t]);
 
     const loadData = (newLocation: Location, initialLoad = false) => {
         if (!initialLoad) {
           startTransition(async () => {
-            const data = await fetchWeatherData(newLocation);
+            const data = await fetchWeatherData(newLocation, language);
             setWeatherData(data);
           });
         } else {
           // Avoid transition on initial load to prevent UI flicker
           (async () => {
             setRecommendationsLoading(true);
-            const data = await fetchWeatherData(newLocation);
+            const data = await fetchWeatherData(newLocation, language);
             setWeatherData(data);
           })();
         }
@@ -114,11 +119,11 @@ export default function BogorWeatherWatch() {
             <div className="container mx-auto">
                 <header className="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4">
                     <div className="flex items-center gap-3">
-                        <h1 className="text-3xl md:text-4xl font-headline font-bold text-primary">Weather Watch</h1>
+                        <h1 className="text-3xl md:text-4xl font-headline font-bold text-primary">{t('weather.title')}</h1>
                     </div>
                     <div className="bg-primary/20 p-1 rounded-full flex gap-1 transition-all duration-300">
-                        <Button onClick={() => handleLocationChange('city')} variant={location === 'city' ? 'default' : 'ghost'} className="rounded-full px-4 sm:px-6 shadow-sm" size="sm">Bogor City</Button>
-                        <Button onClick={() => handleLocationChange('regency')} variant={location === 'regency' ? 'default' : 'ghost'} className="rounded-full px-4 sm:px-6 shadow-sm" size="sm">Bogor Regency</Button>
+                        <Button onClick={() => handleLocationChange('city')} variant={location === 'city' ? 'default' : 'ghost'} className="rounded-full px-4 sm:px-6 shadow-sm" size="sm">{t('weather.city')}</Button>
+                        <Button onClick={() => handleLocationChange('regency')} variant={location === 'regency' ? 'default' : 'ghost'} className="rounded-full px-4 sm:px-6 shadow-sm" size="sm">{t('weather.regency')}</Button>
                     </div>
                 </header>
 
@@ -135,7 +140,7 @@ export default function BogorWeatherWatch() {
                 </main>
 
                 <footer className="text-center mt-12 text-muted-foreground text-sm">
-                    <p>Data cuaca untuk tujuan demonstrasi. Didukung oleh AI.</p>
+                    <p>{t('weather.footer')}</p>
                 </footer>
             </div>
         </div>

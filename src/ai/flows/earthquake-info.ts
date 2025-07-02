@@ -16,6 +16,7 @@ const EarthquakeInfoInputSchema = z.object({
     location: z.string().describe('The location of the earthquake epicenter.'),
     depth: z.number().describe('The depth of the earthquake in kilometers.'),
     time: z.string().describe('The time the earthquake occurred.'),
+    language: z.enum(['Indonesian', 'English']).describe('The language for the AI-generated response.'),
 });
 export type EarthquakeInfoInput = z.infer<typeof EarthquakeInfoInputSchema>;
 
@@ -42,6 +43,7 @@ const prompt = ai.definePrompt({
 Based on this data, provide a concise summary of the event.
 Then, generate a list of essential safety tips for people in and around the affected area. The tips should be clear, concise, and practical.
 Focus on immediate actions and post-earthquake precautions.
+Generate the entire response in {{{language}}}.
 `,
 });
 

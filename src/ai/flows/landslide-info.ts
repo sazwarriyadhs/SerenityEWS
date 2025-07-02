@@ -17,6 +17,7 @@ const LandslideInfoInputSchema = z.object({
     trigger: z.string().describe('The primary trigger for the landslide risk (e.g., heavy rainfall, earthquake).'),
     time: z.string().describe('The time the risk was assessed.'),
     potentialImpact: z.string().describe('The potential impact of the landslide.'),
+    language: z.enum(['Indonesian', 'English']).describe('The language for the AI-generated response.'),
 });
 export type LandslideInfoInput = z.infer<typeof LandslideInfoInputSchema>;
 
@@ -43,6 +44,7 @@ const prompt = ai.definePrompt({
 
 Based on this data, provide a concise summary of the situation.
 Then, generate a list of essential safety recommendations for people in and around the high-risk area. The tips should be clear, practical, and prioritize immediate actions and evacuation procedures if necessary.
+Generate the entire response in {{{language}}}.
 `,
 });
 

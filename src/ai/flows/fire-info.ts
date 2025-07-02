@@ -17,6 +17,7 @@ const FireInfoInputSchema = z.object({
     type: z.string().describe('The type of fire (e.g., Wildfire, Structural).'),
     time: z.string().describe('The time the incident was reported.'),
     cause: z.string().describe('The suspected cause of the fire.'),
+    language: z.enum(['Indonesian', 'English']).describe('The language for the AI-generated response.'),
 });
 export type FireInfoInput = z.infer<typeof FireInfoInputSchema>;
 
@@ -43,6 +44,7 @@ const prompt = ai.definePrompt({
 
 Based on this data, provide a concise summary of the situation.
 Then, generate a list of essential safety recommendations for people in and around the affected area. The tips should be clear, practical, and prioritize immediate actions, especially regarding air quality and potential evacuation orders.
+Generate the entire response in {{{language}}}.
 `,
 });
 

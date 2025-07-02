@@ -8,7 +8,7 @@ export interface FireData {
 
 const getFormattedTime = () => {
     const date = new Date();
-    return date.toLocaleString('en-US', {
+    return date.toLocaleString('en-GB', {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
@@ -19,11 +19,11 @@ const getFormattedTime = () => {
 }
 
 const mockFireData: FireData = {
-  location: 'Kawasan Industri Sentul, Bogor',
+  location: 'Sentul Industrial Area, Bogor',
   status: 'Under Control',
   type: 'Structural',
   time: getFormattedTime(),
-  cause: 'Korsleting listrik'
+  cause: 'Electrical short circuit'
 };
 
 export const getFireData = async (): Promise<FireData> => {

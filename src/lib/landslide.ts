@@ -8,7 +8,7 @@ export interface LandslideData {
 
 const getFormattedTime = () => {
     const date = new Date();
-    return date.toLocaleString('en-US', {
+    return date.toLocaleString('en-GB', {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
@@ -21,9 +21,9 @@ const getFormattedTime = () => {
 const mockLandslideData: LandslideData = {
   location: 'Cisarua, Bogor Regency',
   riskLevel: 'Moderate',
-  trigger: 'Curah hujan intensitas tinggi',
+  trigger: 'High intensity rainfall',
   time: getFormattedTime(),
-  potentialImpact: 'Berpotensi menutup akses jalan utama.'
+  potentialImpact: 'Potential to block main road access.'
 };
 
 export const getLandslideData = async (): Promise<LandslideData> => {

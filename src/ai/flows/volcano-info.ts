@@ -16,6 +16,7 @@ const VolcanoInfoInputSchema = z.object({
     status: z.string().describe('The current alert level of the volcano (e.g., Level I - Normal, Level II - Waspada, Level III - Siaga, Level IV - Awas).'),
     lastEruption: z.string().describe('The time of the last recorded eruption or significant activity.'),
     recommendations: z.array(z.string()).describe('Official recommendations from the monitoring agency.'),
+    language: z.enum(['Indonesian', 'English']).describe('The language for the AI-generated response.'),
 });
 export type VolcanoInfoInput = z.infer<typeof VolcanoInfoInputSchema>;
 
@@ -43,6 +44,7 @@ const prompt = ai.definePrompt({
 
 Based on this data, provide a concise summary of the current situation.
 Then, generate a list of essential safety precautions for people in the vicinity. The precautions should be clear, practical, and tailored to the current alert level.
+Generate the entire response in {{{language}}}.
 `,
 });
 

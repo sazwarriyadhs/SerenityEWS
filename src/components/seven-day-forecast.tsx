@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import type { ForecastDay } from "@/lib/weather";
 import { WeatherIcon } from "./weather-icon";
+import { useLanguage } from "@/contexts/language-context";
 
 interface SevenDayForecastProps {
     forecast: ForecastDay[] | undefined;
@@ -33,10 +34,11 @@ const ForecastSkeleton = () => (
 );
 
 export default function SevenDayForecast({ forecast, isLoading }: SevenDayForecastProps) {
+    const { t } = useLanguage();
     return (
         <Card>
             <CardHeader>
-                <CardTitle className="text-2xl text-primary font-bold">7-Day Forecast</CardTitle>
+                <CardTitle className="text-2xl text-primary font-bold">{t('weather.forecast_7_day')}</CardTitle>
             </CardHeader>
             <CardContent>
                 <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-4">
