@@ -54,7 +54,7 @@ export function AppHeader() {
                             alt="Serenity EWS Bogor Logo"
                             width={150}
                             height={150}
-                            className="h-14 w-14"
+                            className="h-16 w-16"
                         />
                         <div className="hidden sm:block">
                             <span className="text-xl font-bold text-primary">{t('header.title')}</span>
