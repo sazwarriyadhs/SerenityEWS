@@ -5,6 +5,8 @@ import { getWeatherData, Location, WeatherData } from "@/lib/weather";
 import { z } from "zod";
 import { getEarthquakeData, EarthquakeData } from "@/lib/earthquake";
 import { earthquakeInfo, EarthquakeInfoInput, EarthquakeInfoOutput } from "@/ai/flows/earthquake-info";
+import { getLandslideData, LandslideData } from "@/lib/landslide";
+import { landslideInfo, LandslideInfoInput, LandslideInfoOutput } from "@/ai/flows/landslide-info";
 
 export async function fetchWeatherData(location: Location): Promise<WeatherData> {
     return getWeatherData(location);
@@ -54,6 +56,32 @@ export async function fetchEarthquakeInfo(input: EarthquakeInfoInput): Promise<E
         return info;
     } catch (error) {
         console.error("Error fetching earthquake info:", error);
+        if (error instanceof z.ZodError) {
+            console.error("Zod validation errors:", error.errors);
+        }
+        return null;
+    }
+}
+
+export async function fetchLandslideData(): Promise<LandslideData> {
+    return getLandslideData();
+}
+
+const LandslideInfoInputSchema = z.object({
+    location: z.string(),
+    riskLevel: z.string(),
+    trigger: z.string(),
+    time: z.string(),
+    potentialImpact: z.string(),
+});
+
+export async function fetchLandslideInfo(input: LandslideInfoInput): Promise<LandslideInfoOutput | null> {
+    try {
+        const validatedInput = LandslideInfoInputSchema.parse(input);
+        const info = await landslideInfo(validatedInput);
+        return info;
+    } catch (error) {
+        console.error("Error fetching landslide info:", error);
         if (error instanceof z.ZodError) {
             console.error("Zod validation errors:", error.errors);
         }

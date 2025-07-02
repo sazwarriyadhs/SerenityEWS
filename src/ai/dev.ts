@@ -3,3 +3,4 @@ config();
 
 import '@/ai/flows/weather-recommendations.ts';
 import '@/ai/flows/earthquake-info.ts';
+import '@/ai/flows/landslide-info.ts';
