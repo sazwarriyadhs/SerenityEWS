@@ -9,8 +9,8 @@ export function SplashScreen() {
         <Image
           src="/images/logo.png"
           alt="Serenity EWS Bogor Logo"
-          width={150}
-          height={150}
+          width={200}
+          height={200}
           priority
         />
       </div>
