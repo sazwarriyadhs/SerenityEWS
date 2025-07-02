@@ -135,7 +135,7 @@ export default function BogorWeatherWatch() {
                 </main>
 
                 <footer className="text-center mt-12 text-muted-foreground text-sm">
-                    <p>Powered by AI. Weather data is for demonstration purposes.</p>
+                    <p>Data cuaca untuk tujuan demonstrasi. Didukung oleh AI.</p>
                 </footer>
             </div>
         </div>

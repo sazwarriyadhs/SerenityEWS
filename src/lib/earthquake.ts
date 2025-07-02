@@ -19,15 +19,16 @@ const getFormattedTime = () => {
 }
 
 const mockEarthquakeData: EarthquakeData = {
-  magnitude: 5.2,
-  location: '150 km Southwest of Bogor, West Java',
-  depth: 10,
+  magnitude: 4.8,
+  location: 'Laut Jawa, 90 km Utara Jakarta',
+  depth: 22,
   time: getFormattedTime(),
-  epicenter: 'Bogor Regency'
+  epicenter: 'Laut Jawa'
 };
 
 export const getEarthquakeData = async (): Promise<EarthquakeData> => {
   // Simulate API call delay
   await new Promise(resolve => setTimeout(resolve, 500));
+  // In a real application, you would fetch this data from an API like https://gis.bnpb.go.id/
   return mockEarthquakeData;
 };

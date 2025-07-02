@@ -19,15 +19,16 @@ const getFormattedTime = () => {
 }
 
 const mockFireData: FireData = {
-  location: 'Sukaraja, Bogor Regency',
-  status: 'Active',
-  type: 'Wildfire',
+  location: 'Kawasan Industri Sentul, Bogor',
+  status: 'Under Control',
+  type: 'Structural',
   time: getFormattedTime(),
-  cause: 'Lightning strike'
+  cause: 'Korsleting listrik'
 };
 
 export const getFireData = async (): Promise<FireData> => {
   // Simulate API call delay
   await new Promise(resolve => setTimeout(resolve, 500));
+  // In a real application, you would fetch this data from an API like https://gis.bnpb.go.id/
   return mockFireData;
 };

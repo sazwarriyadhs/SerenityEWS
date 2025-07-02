@@ -151,7 +151,7 @@ export default function WhirlwindPage() {
                 </Card>
             </div>
             <footer className="text-center mt-12 text-muted-foreground text-sm">
-                <p>Powered by AI. Storm data is for demonstration purposes.</p>
+                <p>Data bersumber dari gis.bnpb.go.id (untuk tujuan demonstrasi). Didukung oleh AI.</p>
             </footer>
         </div>
     );

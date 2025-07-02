@@ -19,15 +19,16 @@ const getFormattedTime = () => {
 }
 
 const mockLandslideData: LandslideData = {
-  location: 'Puncak Pass, Bogor Regency',
-  riskLevel: 'High',
-  trigger: 'Prolonged heavy rainfall',
+  location: 'Cisarua, Bogor Regency',
+  riskLevel: 'Moderate',
+  trigger: 'Curah hujan intensitas tinggi',
   time: getFormattedTime(),
-  potentialImpact: 'Road closure and potential damage to nearby structures.'
+  potentialImpact: 'Berpotensi menutup akses jalan utama.'
 };
 
 export const getLandslideData = async (): Promise<LandslideData> => {
   // Simulate API call delay
   await new Promise(resolve => setTimeout(resolve, 500));
+    // In a real application, you would fetch this data from an API like https://gis.bnpb.go.id/
   return mockLandslideData;
 };

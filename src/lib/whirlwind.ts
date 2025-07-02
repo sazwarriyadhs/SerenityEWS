@@ -19,15 +19,16 @@ const getFormattedTime = () => {
 }
 
 const mockWhirlwindData: WhirlwindData = {
-  location: 'Coastal area near Bogor, West Java',
-  category: 'Tropical Storm "Anggrek"',
-  windSpeed: 85,
+  location: 'Perairan Selatan Jawa Barat',
+  category: 'Siklon Tropis "Cempaka"',
+  windSpeed: 95,
   time: getFormattedTime(),
-  potentialThreat: 'Heavy rainfall, strong winds, and potential for coastal flooding.'
+  potentialThreat: 'Potensi angin kencang dan hujan lebat.'
 };
 
 export const getWhirlwindData = async (): Promise<WhirlwindData> => {
   // Simulate API call delay
   await new Promise(resolve => setTimeout(resolve, 500));
+  // In a real application, you would fetch this data from an API like https://gis.bnpb.go.id/ for extreme weather
   return mockWhirlwindData;
 };
