@@ -4,6 +4,10 @@ export interface LandslideData {
   trigger: string;
   time: string;
   potentialImpact: string;
+  coords: {
+    latitude: number;
+    longitude: number;
+  };
 }
 
 const getFormattedTime = () => {
@@ -23,7 +27,11 @@ const mockLandslideData: LandslideData = {
   riskLevel: 'Moderate',
   trigger: 'High intensity rainfall',
   time: getFormattedTime(),
-  potentialImpact: 'Potential to block main road access.'
+  potentialImpact: 'Potential to block main road access.',
+  coords: {
+    latitude: -6.69,
+    longitude: 106.94
+  }
 };
 
 export const getLandslideData = async (): Promise<LandslideData> => {

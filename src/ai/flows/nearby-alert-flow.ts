@@ -24,6 +24,7 @@ const NearbyAlertInputSchema = z.object({
     longitude: z.number(),
   }).describe('The GPS coordinates of the user.'),
   language: z.enum(['Indonesian', 'English']).describe('The language for the AI-generated response.'),
+  unsafeRadiusKm: z.number().describe('The radius in kilometers from a disaster epicenter considered to be high-risk.'),
   disasterData: z.object({
       earthquake: z.custom<EarthquakeData>(),
       landslide: z.custom<LandslideData>(),
@@ -40,6 +41,7 @@ const NearbyAlertOutputSchema = z.object({
   riskType: z.string().describe('The primary type of risk identified (e.g., "Flood", "Earthquake"). Empty if not at risk. Respond in the requested language.'),
   alertTitle: z.string().describe('A concise, urgent title for the alert. Empty if not at risk. Respond in the requested language.'),
   alertMessage: z.string().describe('A summary of the situation and why the user is considered at risk. Empty if not at risk. Respond in the requested language.'),
+  riskDistanceKm: z.number().optional().describe('The approximate distance in kilometers from the user to the hazard. Only present if at risk.'),
   safetyRecommendations: z.array(z.string()).describe('A list of actionable safety recommendations tailored to the specific risk. Empty if not at risk. Respond in the requested language.'),
 });
 export type NearbyAlertOutput = z.infer<typeof NearbyAlertOutputSchema>;
@@ -52,26 +54,29 @@ const prompt = ai.definePrompt({
   name: 'nearbyAlertPrompt',
   input: {schema: NearbyAlertInputSchema},
   output: {schema: NearbyAlertOutputSchema},
-  prompt: `You are a "Safety First" disaster alert system for Bogor, Indonesia. Your primary task is to assess if a user is in immediate danger based on their GPS coordinates and the latest disaster data.
+  prompt: `You are a "Safety First" disaster alert system for Bogor, Indonesia. Your primary task is to assess if a user is in immediate danger based on their GPS coordinates and the latest disaster data. A user is considered at high risk if they are within {{{unsafeRadiusKm}}} km of a hazard's coordinates.
 
 User's Location:
 - Latitude: {{{userLocation.latitude}}}
 - Longitude: {{{userLocation.longitude}}}
 
-Latest Disaster Data:
-- Flood (Katulampa Dam): Status '{{{disasterData.flood.status}}}', Water Level {{{disasterData.flood.waterLevel}}}cm. This affects areas downstream along the Ciliwung river. High risk if status is Siaga 1, 2, or 3.
-- Earthquake: Magnitude {{{disasterData.earthquake.magnitude}}} located at {{{disasterData.earthquake.location}}}. Any significant magnitude (> 4.5) is a risk for the entire Bogor area.
-- Landslide: Risk '{{{disasterData.landslide.riskLevel}}}' at {{{disasterData.landslide.location}}}. Cisarua is in the Bogor Regency (south of Bogor City). High risk if the user is in the regency and risk level is 'High'.
-- Fire: '{{{disasterData.fire.status}}}' fire at {{{disasterData.fire.location}}}. Sentul is in the Bogor Regency. High risk if the user is nearby and the fire is 'Active'.
-- Volcano (Mount Salak): Status '{{{disasterData.volcano.status}}}'. High risk if status is anything other than 'Level I (Normal)'. Mount Salak is very close to Bogor City.
-- Whirlwind/Typhoon: '{{{disasterData.whirlwind.category}}}' with winds {{{disasterData.whirlwind.windSpeed}}} km/h located at {{{disasterData.whirlwind.location}}}. Assess if the potential threat area could include Bogor.
+Latest Disaster Data & Coordinates:
+- Flood (Katulampa Dam): Status '{{{disasterData.flood.status}}}'. This is a high risk if status is Siaga 1, 2, or 3. The risk is for downstream areas, so proximity to the dam at {{{disasterData.flood.damCoords.latitude}}}, {{{disasterData.flood.damCoords.longitude}}} is not the primary factor, but the status is.
+- Earthquake: Magnitude {{{disasterData.earthquake.magnitude}}} at Coords: {{{disasterData.earthquake.epicenterCoords.latitude}}}, {{{disasterData.earthquake.epicenterCoords.longitude}}}. Any magnitude > 4.5 is a potential risk.
+- Landslide: Risk '{{{disasterData.landslide.riskLevel}}}' at Coords: {{{disasterData.landslide.coords.latitude}}}, {{{disasterData.landslide.coords.longitude}}}. High risk if level is 'High'.
+- Fire: '{{{disasterData.fire.status}}}' fire at Coords: {{{disasterData.fire.coords.latitude}}}, {{{disasterData.fire.coords.longitude}}}. High risk if 'Active'.
+- Volcano (Mount Salak): Status '{{{disasterData.volcano.status}}}' at Coords: {{{disasterData.volcano.coords.latitude}}}, {{{disasterData.volcano.coords.longitude}}}. High risk if status is not 'Level I (Normal)'.
+- Whirlwind/Typhoon: '{{{disasterData.whirlwind.category}}}' with epicenter at Coords: {{{disasterData.whirlwind.epicenterCoords.latitude}}}, {{{disasterData.whirlwind.epicenterCoords.longitude}}}.
 
 Your Task:
-1.  Analyze all disaster data in relation to the user's location.
-2.  Prioritize the most immediate and severe threat.
-3.  If you determine there is a significant and immediate risk, set 'isAtRisk' to true.
-4.  If at risk, generate a concise 'alertTitle', a clear 'alertMessage' explaining the specific threat and why they are at risk, and a list of crucial 'safetyRecommendations' (at least 3).
-5.  If there is no immediate, significant risk (e.g., earthquake magnitude is low, dam status is normal, volcano is normal), set 'isAtRisk' to false. In this case, all other fields should be empty strings or empty arrays.
+1.  Analyze all disaster data. For each disaster, determine if the user's location is within the {{{unsafeRadiusKm}}} km high-risk radius of the disaster's coordinates.
+2.  Prioritize the most immediate and severe threat. A direct proximity threat (e.g., Fire, Landslide) is generally higher priority than a regional one (e.g., distant earthquake), unless the regional event is exceptionally severe. Flood risk is determined by status, not proximity.
+3.  If you determine there is a significant risk due to proximity or a high alert status, set 'isAtRisk' to true.
+4.  If at risk:
+    a. Fill in 'riskType', 'alertTitle', and 'alertMessage'. The message must explain the specific threat and mention that they are within the high-risk zone.
+    b. Estimate the 'riskDistanceKm' from the user to the specific hazard.
+    c. Generate a list of crucial 'safetyRecommendations' (at least 3).
+5.  If there is no immediate, significant risk, set 'isAtRisk' to false. All other fields should be empty or null.
 6.  Provide the entire response in {{{language}}}.
 `,
 });

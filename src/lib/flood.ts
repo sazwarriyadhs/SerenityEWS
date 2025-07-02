@@ -3,6 +3,10 @@ export interface FloodData {
   waterLevel: number;
   status: 'Siaga 1 (Awas)' | 'Siaga 2 (Siaga)' | 'Siaga 3 (Waspada)' | 'Siaga 4 (Normal)';
   time: string;
+  damCoords: {
+    latitude: number;
+    longitude: number;
+  };
 }
 
 const getFormattedTime = () => {
@@ -22,6 +26,10 @@ const mockFloodData: FloodData = {
   waterLevel: 70, // in cm
   status: 'Siaga 4 (Normal)',
   time: getFormattedTime(),
+  damCoords: {
+    latitude: -6.63,
+    longitude: 106.84
+  }
 };
 
 export const getFloodData = async (): Promise<FloodData> => {

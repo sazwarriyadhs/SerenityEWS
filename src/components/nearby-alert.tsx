@@ -9,7 +9,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Siren, ShieldCheck, MapPin, Loader2, ListChecks, CloudSun } from 'lucide-react';
+import { Siren, ShieldCheck, MapPin, Loader2, ListChecks, CloudSun, Compass } from 'lucide-react';
 import Link from 'next/link';
 
 type GpsLocation = {
@@ -93,6 +93,12 @@ export default function NearbyAlert() {
           <AlertTitle className="text-xl font-bold">{alertInfo.alertTitle}</AlertTitle>
           <AlertDescription className="space-y-4 mt-2">
             <p className="text-base">{alertInfo.alertMessage}</p>
+             {alertInfo.riskDistanceKm && (
+                <div className="flex items-center gap-2 text-sm font-semibold p-2 bg-destructive-foreground/10 rounded-md">
+                    <Compass />
+                    <span>{t('nearby_alert.risk_distance', alertInfo.riskDistanceKm.toFixed(1))}</span>
+                </div>
+             )}
             <div>
               <h4 className="font-semibold text-destructive-foreground mb-2 flex items-center gap-2">
                 <ListChecks />

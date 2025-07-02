@@ -3,6 +3,10 @@ export interface VolcanoData {
   status: 'Level IV (Awas)' | 'Level III (Siaga)' | 'Level II (Waspada)' | 'Level I (Normal)';
   lastEruption: string;
   recommendations: string[];
+  coords: {
+    latitude: number;
+    longitude: number;
+  };
 }
 
 const getFormattedTime = () => {
@@ -23,7 +27,11 @@ const mockVolcanoData: VolcanoData = {
     'Volcanic activity is at a normal level.',
     'Public and tourists are advised not to approach the crater within a 1 km radius.',
     'Stay alert and follow information from official sources.',
-  ]
+  ],
+  coords: {
+    latitude: -6.71,
+    longitude: 106.73
+  }
 };
 
 export const getVolcanoData = async (): Promise<VolcanoData> => {

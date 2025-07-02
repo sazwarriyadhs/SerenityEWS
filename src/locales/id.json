@@ -176,6 +176,7 @@
         "safe_title": "Anda Berada di Area Aman",
         "safe_message": "Kami telah menganalisis lokasi Anda saat ini terhadap data terbaru dan tidak menemukan ancaman berisiko tinggi di sekitar Anda. Tetap waspada dan periksa kembali untuk pembaruan.",
         "safety_first_recommendations": "Rekomendasi Keselamatan Utama",
-        "view_weather": "Lihat Prakiraan Cuaca Lengkap"
+        "view_weather": "Lihat Prakiraan Cuaca Lengkap",
+        "risk_distance": "Perkiraan jarak: {0} km"
     }
 }

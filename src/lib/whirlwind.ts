@@ -4,6 +4,10 @@ export interface WhirlwindData {
   windSpeed: number;
   time: string;
   potentialThreat: string;
+  epicenterCoords: {
+    latitude: number;
+    longitude: number;
+  };
 }
 
 const getFormattedTime = () => {
@@ -23,7 +27,11 @@ const mockWhirlwindData: WhirlwindData = {
   category: 'Tropical Cyclone "Cempaka"',
   windSpeed: 95,
   time: getFormattedTime(),
-  potentialThreat: 'Potential for strong winds and heavy rain.'
+  potentialThreat: 'Potential for strong winds and heavy rain.',
+  epicenterCoords: {
+    latitude: -8.5,
+    longitude: 107.0
+  }
 };
 
 export const getWhirlwindData = async (): Promise<WhirlwindData> => {

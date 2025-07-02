@@ -277,6 +277,7 @@ export async function fetchNearbyAlert(input: z.infer<typeof NearbyAlertInputCli
         const alert = await nearbyAlert({
             userLocation: validatedInput,
             language: lang === 'en' ? 'English' : 'Indonesian',
+            unsafeRadiusKm: 20, // Define the high-risk radius in KM
             disasterData: { earthquake, landslide, fire, whirlwind, volcano, flood }
         });
 

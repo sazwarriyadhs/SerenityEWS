@@ -176,6 +176,7 @@
         "safe_title": "You Are in a Safe Area",
         "safe_message": "We have analyzed your current location against the latest data and found no immediate high-risk threats in your vicinity. Stay vigilant and check back for updates.",
         "safety_first_recommendations": "Safety First Recommendations",
-        "view_weather": "View Full Weather Forecast"
+        "view_weather": "View Full Weather Forecast",
+        "risk_distance": "Approximate distance: {0} km"
     }
 }

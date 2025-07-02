@@ -4,6 +4,10 @@ export interface FireData {
   type: string;
   time: string;
   cause: string;
+  coords: {
+    latitude: number;
+    longitude: number;
+  };
 }
 
 const getFormattedTime = () => {
@@ -23,7 +27,11 @@ const mockFireData: FireData = {
   status: 'Under Control',
   type: 'Structural',
   time: getFormattedTime(),
-  cause: 'Electrical short circuit'
+  cause: 'Electrical short circuit',
+  coords: {
+    latitude: -6.55,
+    longitude: 106.85
+  }
 };
 
 export const getFireData = async (): Promise<FireData> => {

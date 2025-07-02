@@ -4,6 +4,10 @@ export interface EarthquakeData {
   depth: number;
   time: string;
   epicenter: string;
+  epicenterCoords: {
+    latitude: number;
+    longitude: number;
+  };
 }
 
 const getFormattedTime = () => {
@@ -23,7 +27,11 @@ const mockEarthquakeData: EarthquakeData = {
   location: 'Java Sea, 90 km North of Jakarta',
   depth: 22,
   time: getFormattedTime(),
-  epicenter: 'Java Sea'
+  epicenter: 'Java Sea',
+  epicenterCoords: {
+    latitude: -5.4,
+    longitude: 106.8
+  }
 };
 
 export const getEarthquakeData = async (): Promise<EarthquakeData> => {
