@@ -1,6 +1,6 @@
 'use client';
 
-import { CloudSun, Zap, Menu, Mountain, Flame, Tornado, ArrowDownFromLine, Waves } from 'lucide-react';
+import { CloudSun, Zap, Menu, Mountain, Flame, Tornado, ArrowDownFromLine, Waves, Megaphone } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Button } from './ui/button';
@@ -23,6 +23,7 @@ export function AppHeader() {
         { href: '/fire', label: t('nav.fire'), icon: Flame },
         { href: '/whirlwind', label: t('nav.whirlwind'), icon: Tornado },
         { href: '/volcano', label: t('nav.volcano'), icon: Mountain },
+        { href: '/community-reports', label: t('nav.community'), icon: Megaphone },
     ];
 
     const NavLinks = ({ isMobile = false }: { isMobile?: boolean }) => (

@@ -8,3 +8,4 @@ import '@/ai/flows/fire-info.ts';
 import '@/ai/flows/whirlwind-info.ts';
 import '@/ai/flows/volcano-info.ts';
 import '@/ai/flows/flood-info.ts';
+import '@/ai/flows/categorize-report.ts';

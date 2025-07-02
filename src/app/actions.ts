@@ -15,6 +15,9 @@ import { getVolcanoData, VolcanoData } from "@/lib/volcano";
 import { volcanoInfo, VolcanoInfoInput, VolcanoInfoOutput } from "@/ai/flows/volcano-info";
 import { getFloodData, FloodData } from "@/lib/flood";
 import { floodInfo, FloodInfoInput, FloodInfoOutput } from "@/ai/flows/flood-info";
+import { categorizeReport, CategorizeReportInput, CategorizeReportOutput } from "@/ai/flows/categorize-report";
+import { UserReport, initialReports } from "@/lib/reports";
+
 
 type Language = 'en' | 'id';
 
@@ -198,5 +201,55 @@ export async function fetchFloodInfo(input: z.infer<typeof FloodInfoInputClientS
             console.error("Zod validation errors:", error.errors);
         }
         return null;
+    }
+}
+
+export async function fetchReports(): Promise<UserReport[]> {
+    // In a real app, this would fetch from a database.
+    // For now, we return mock data.
+    await new Promise(resolve => setTimeout(resolve, 500));
+    return initialReports;
+}
+
+const SubmitReportInputClientSchema = z.object({
+    photoDataUri: z.string(),
+    description: z.string().min(10, "Description must be at least 10 characters long."),
+    location: z.object({
+        latitude: z.number(),
+        longitude: z.number(),
+    }),
+});
+
+export async function submitReport(input: z.infer<typeof SubmitReportInputClientSchema>, lang: Language): Promise<UserReport | { error: string }> {
+    try {
+        const validatedInput = SubmitReportInputClientSchema.parse(input);
+        
+        const aiResult = await categorizeReport({
+            ...validatedInput,
+            language: lang === 'en' ? 'English' : 'Indonesian',
+        });
+
+        if (!aiResult) {
+            throw new Error("AI analysis failed.");
+        }
+
+        const newReport: UserReport = {
+            id: new Date().toISOString(),
+            ...validatedInput,
+            category: aiResult.category,
+            summary: aiResult.summary,
+            timestamp: new Date().toISOString(),
+            user: lang === 'en' ? 'Anonymous Citizen' : 'Warga Anonim', // Placeholder for user
+        };
+
+        return newReport;
+
+    } catch (error) {
+        console.error("Error submitting report:", error);
+        if (error instanceof z.ZodError) {
+            console.error("Zod validation errors:", error.errors);
+            return { error: "Invalid input." };
+        }
+        return { error: "Failed to submit report." };
     }
 }

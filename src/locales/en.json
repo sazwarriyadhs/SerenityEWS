@@ -9,7 +9,8 @@
         "fire": "Fire",
         "whirlwind": "Whirlwind",
         "volcano": "Volcano",
-        "flood": "Flood"
+        "flood": "Flood",
+        "community": "Community"
     },
     "weather": {
         "title": "Weather Watch",
@@ -54,15 +55,15 @@
         "subtitle": "Latest landslide risk information and safety tips for the Bogor area.",
         "current_risk": "Current Risk Assessment",
         "risk_level": "Risk Level",
-        "location": "Location",
         "trigger": "Primary Trigger",
         "assessment_time": "Assessment Time",
         "potential_impact": "Potential Impact",
         "ai_summary_tips": "AI Summary & Safety Tips",
-        "summary": "Summary",
         "safety_recommendations": "Safety Recommendations",
         "no_ai_info": "No AI information available.",
-        "footer": "Data sourced from gis.bnpb.go.id (for demonstration purposes). Powered by AI."
+        "footer": "Data sourced from gis.bnpb.go.id (for demonstration purposes). Powered by AI.",
+        "summary": "Summary",
+        "location": "Location"
     },
     "fire": {
         "title": "Fire Report",
@@ -122,6 +123,36 @@
         "safety_recommendations": "Safety Recommendations",
         "no_ai_info": "No AI information available.",
         "footer": "Data sourced from poskobanjir.dsdadki.web.id (for demonstration purposes). Powered by AI."
+    },
+    "community": {
+        "title": "Community Reports",
+        "subtitle": "See what's happening around you, reported by fellow citizens.",
+        "add_report": "Add Report",
+        "no_reports": "No community reports yet. Be the first to share!",
+        "user_report_from": "User report from {0}",
+        "location": "Location",
+        "category": "Category",
+        "summary": "AI Summary",
+        "description": "Description",
+        "reported_at": "Reported at",
+        "get_location": "Get Current Location",
+        "getting_location": "Getting location...",
+        "location_unavailable": "Location not available",
+        "capture_photo": "Capture Photo",
+        "retake_photo": "Retake",
+        "submit_report": "Submit Report",
+        "submitting": "Submitting...",
+        "report_description_placeholder": "Describe the incident in detail...",
+        "photo_required": "A photo and a description of at least 10 characters are required.",
+        "error_title": "Submission Failed",
+        "error_description": "There was an error submitting your report. Please try again.",
+        "success_title": "Report Submitted",
+        "success_description": "Thank you! Your report has been submitted and will be visible to the community.",
+        "camera_permission_denied_title": "Camera Access Denied",
+        "camera_permission_denied_description": "Please enable camera permissions in your browser settings to submit a report.",
+        "camera_access_required_title": "Camera Access Required",
+        "camera_access_required_description": "Please allow camera access to use this feature.",
+        "cancel": "Cancel"
     },
     "language": {
         "english": "English",
