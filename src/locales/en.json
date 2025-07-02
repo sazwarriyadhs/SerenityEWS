@@ -11,7 +11,8 @@
         "whirlwind": "Whirlwind",
         "volcano": "Volcano",
         "flood": "Flood",
-        "community": "Community"
+        "community": "Community",
+        "disaster_report": "Reports"
     },
     "weather": {
         "title": "Weather Watch",
@@ -154,6 +155,20 @@
         "camera_access_required_title": "Camera Access Required",
         "camera_access_required_description": "Please allow camera access to use this feature.",
         "cancel": "Cancel"
+    },
+    "disaster_report": {
+        "title": "Annual Disaster Report",
+        "subtitle": "View statistics and AI-driven trend analysis for disasters in Bogor.",
+        "select_year": "Select Year",
+        "chart_title": "Incidents by Category",
+        "incident_count": "Incident Count",
+        "no_data_for_chart": "No data available for the selected year and location.",
+        "ai_analysis_title": "AI Trend Analysis",
+        "trend_summary": "Trend Summary",
+        "key_observations": "Key Observations",
+        "future_outlook": "Future Outlook & Recommendations",
+        "no_analysis": "AI analysis is not available for this selection.",
+        "footer": "Data is for demonstration purposes and does not represent real-world statistics."
     },
     "language": {
         "english": "English",

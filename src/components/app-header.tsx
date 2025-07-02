@@ -1,6 +1,6 @@
 'use client';
 
-import { CloudSun, Zap, Menu, Mountain, Flame, Tornado, ArrowDownFromLine, Waves, Megaphone } from 'lucide-react';
+import { CloudSun, Zap, Menu, Mountain, Flame, Tornado, ArrowDownFromLine, Waves, Megaphone, BarChart3 } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
@@ -18,22 +18,23 @@ export function AppHeader() {
 
     const navItems = [
         { href: '/weather', label: t('nav.weather'), icon: CloudSun },
+        { href: '/disaster-report', label: t('nav.disaster_report'), icon: BarChart3 },
+        { href: '/community-reports', label: t('nav.community'), icon: Megaphone },
         { href: '/earthquake', label: t('nav.earthquake'), icon: Zap },
         { href: '/landslide', label: t('nav.landslide'), icon: ArrowDownFromLine },
         { href: '/flood', label: t('nav.flood'), icon: Waves },
         { href: '/fire', label: t('nav.fire'), icon: Flame },
         { href: '/whirlwind', label: t('nav.whirlwind'), icon: Tornado },
         { href: '/volcano', label: t('nav.volcano'), icon: Mountain },
-        { href: '/community-reports', label: t('nav.community'), icon: Megaphone },
     ];
 
     const NavLinks = ({ isMobile = false }: { isMobile?: boolean }) => (
-        <nav className={cn("flex items-center gap-2", isMobile && "flex-col items-start gap-4 p-4")}>
+        <nav className={cn("flex items-center gap-1", isMobile && "flex-col items-start gap-4 p-4")}>
             {navItems.map((item) => (
                 <Link href={item.href} key={item.href} passHref>
                     <Button
                         variant={pathname === item.href ? 'default' : 'ghost'}
-                        className={cn("w-full justify-start", !isMobile && "rounded-full")}
+                        className={cn("w-full justify-start text-xs px-3", !isMobile && "rounded-full")}
                         onClick={() => isMobile && setMobileMenuOpen(false)}
                     >
                         <item.icon className="mr-2 h-4 w-4" />
@@ -63,13 +64,13 @@ export function AppHeader() {
                     </Link>
                 </div>
 
-                <div className="hidden md:flex flex-1 justify-center">
+                <div className="hidden lg:flex flex-1 justify-center">
                     <NavLinks />
                 </div>
                 
                 <div className="flex flex-1 justify-end items-center">
                      <LanguageSwitcher />
-                    <div className="md:hidden">
+                    <div className="lg:hidden">
                         <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
                             <SheetTrigger asChild>
                                 <Button variant="ghost" size="icon">

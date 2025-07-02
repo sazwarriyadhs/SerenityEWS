@@ -11,7 +11,8 @@
         "whirlwind": "Angin Puyuh",
         "volcano": "Gunung Berapi",
         "flood": "Banjir",
-        "community": "Komunitas"
+        "community": "Komunitas",
+        "disaster_report": "Laporan"
     },
     "weather": {
         "title": "Pantau Cuaca",
@@ -154,6 +155,20 @@
         "camera_access_required_title": "Akses Kamera Diperlukan",
         "camera_access_required_description": "Harap izinkan akses kamera untuk menggunakan fitur ini.",
         "cancel": "Batal"
+    },
+    "disaster_report": {
+        "title": "Laporan Bencana Tahunan",
+        "subtitle": "Lihat statistik dan analisis tren bencana berbasis AI untuk Bogor.",
+        "select_year": "Pilih Tahun",
+        "chart_title": "Insiden Berdasarkan Kategori",
+        "incident_count": "Jumlah Insiden",
+        "no_data_for_chart": "Tidak ada data yang tersedia untuk tahun dan lokasi yang dipilih.",
+        "ai_analysis_title": "Analisis Tren AI",
+        "trend_summary": "Ringkasan Tren",
+        "key_observations": "Observasi Utama",
+        "future_outlook": "Prospek & Rekomendasi ke Depan",
+        "no_analysis": "Analisis AI tidak tersedia untuk pilihan ini.",
+        "footer": "Data hanya untuk tujuan demonstrasi dan tidak mewakili statistik dunia nyata."
     },
     "language": {
         "english": "Bahasa Inggris",

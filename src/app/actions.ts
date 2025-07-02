@@ -19,6 +19,7 @@ import { categorizeReport, CategorizeReportInput, CategorizeReportOutput } from 
 import type { UserReport } from "@/lib/reports";
 import { nearbyAlert, NearbyAlertOutput } from "@/ai/flows/nearby-alert-flow";
 import pool from "@/lib/db";
+import { disasterTrendAnalysis, DisasterTrendAnalysisInput, DisasterTrendAnalysisOutput } from "@/ai/flows/disaster-trend-analysis";
 
 
 type Language = 'en' | 'id';
@@ -319,6 +320,7 @@ export async function fetchNearbyAlert(input: z.infer<typeof NearbyAlertInputCli
             userLocation: validatedInput,
             language: lang === 'en' ? 'English' : 'Indonesian',
             unsafeRadiusKm: 20, // Define the high-risk radius in KM
+            safeRadiusKm: 50,
             disasterData: { earthquake, landslide, fire, whirlwind, volcano, flood }
         });
 
@@ -326,6 +328,77 @@ export async function fetchNearbyAlert(input: z.infer<typeof NearbyAlertInputCli
 
     } catch (error) {
         console.error("Error fetching nearby alert:", error);
+        if (error instanceof z.ZodError) {
+            console.error("Zod validation errors:", error.errors);
+        }
+        return null;
+    }
+}
+
+// New actions for Disaster Report page
+
+export type AnnualDisasterData = {
+  category: string;
+  count: number;
+};
+
+export async function getAvailableYears(): Promise<number[]> {
+    // In a real app, you would query the distinct years from the database
+    // SELECT DISTINCT EXTRACT(YEAR FROM timestamp) as year FROM reports ORDER BY year DESC;
+    await new Promise(resolve => setTimeout(resolve, 200)); // Simulate DB call
+    const currentYear = new Date().getFullYear();
+    return [currentYear, currentYear - 1, currentYear - 2];
+}
+
+export async function getAnnualDisasterData(location: Location, year: number): Promise<AnnualDisasterData[]> {
+    // This is mocked data. In a real application, you would query your database,
+    // filtering by location and year.
+    // e.g., SELECT category, COUNT(*) as count FROM reports WHERE location_type = $1 AND EXTRACT(YEAR FROM timestamp) = $2 GROUP BY category
+    await new Promise(resolve => setTimeout(resolve, 800)); // Simulate DB call
+
+    const baseData = {
+        'city': [
+            { category: 'Flood', count: 15 },
+            { category: 'Traffic Accident', count: 25 },
+            { category: 'Fallen Tree', count: 18 },
+            { category: 'Fire', count: 7 },
+            { category: 'Road Damage', count: 12 },
+        ],
+        'regency': [
+            { category: 'Landslide', count: 22 },
+            { category: 'Fallen Tree', count: 15 },
+            { category: 'Whirlwind', count: 8 },
+            { category: 'Flood', count: 10 },
+            { category: 'Road Damage', count: 9 },
+        ]
+    };
+
+    // Slightly vary data based on year for demonstration
+    const yearModifier = (new Date().getFullYear() - year) * 0.85;
+    const data = baseData[location].map(item => ({
+        ...item,
+        count: Math.max(1, Math.floor(item.count * (yearModifier || 1) * (Math.random() * 0.4 + 0.8)))
+    }));
+    
+    return data;
+}
+
+const DisasterTrendAnalysisInputClientSchema = z.object({
+  locationName: z.string(),
+  year: z.number(),
+  data: z.array(z.object({
+      category: z.string(),
+      count: z.number(),
+  })),
+});
+
+export async function fetchDisasterTrendAnalysis(input: z.infer<typeof DisasterTrendAnalysisInputClientSchema>, lang: Language): Promise<DisasterTrendAnalysisOutput | null> {
+    try {
+        const validatedInput = DisasterTrendAnalysisInputClientSchema.parse(input);
+        const analysis = await disasterTrendAnalysis({ ...validatedInput, language: lang === 'en' ? 'English' : 'Indonesian' });
+        return analysis;
+    } catch (error) {
+        console.error("Error fetching disaster trend analysis:", error);
         if (error instanceof z.ZodError) {
             console.error("Zod validation errors:", error.errors);
         }
