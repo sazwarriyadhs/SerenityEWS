@@ -111,7 +111,7 @@ export default function VolcanoPage() {
                             <>
                                 <InfoCard icon={ShieldAlert} label="Status" value={volcanoData.status} status={volcanoData.status} />
                                 <InfoCard icon={Mountain} label="Volcano" value={volcanoData.name} />
-                                <InfoCard icon={Clock} label="Last Activity" value={volcanoData.lastEruption} />
+                                <InfoCard icon={Clock} label="Latest Update" value={volcanoData.lastEruption} />
                             </>
                         )}
                     </CardContent>

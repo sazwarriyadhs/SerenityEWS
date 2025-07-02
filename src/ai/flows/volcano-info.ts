@@ -35,7 +35,7 @@ const prompt = ai.definePrompt({
   output: {schema: VolcanoInfoOutputSchema},
   prompt: `You are a volcanologist and disaster preparedness expert. The current status for {{{name}}} is as follows:
 - Status: {{{status}}}
-- Last Eruption/Activity: {{{lastEruption}}}
+- Latest Update / Activity: {{{lastEruption}}}
 - Official Recommendations:
 {{#each recommendations}}
   - {{{this}}}

@@ -7,24 +7,22 @@ export interface VolcanoData {
 
 const getFormattedTime = () => {
     const date = new Date();
-    date.setDate(date.getDate() - 2); // Set activity to a couple of days ago
-    return date.toLocaleString('en-US', {
+    date.setDate(date.getDate() - 30); // Set activity to about a month ago
+    return date.toLocaleString('id-ID', {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
     });
 }
 
 const mockVolcanoData: VolcanoData = {
-  name: 'Gunung Merapi',
-  status: 'Level III (Siaga)',
-  lastEruption: getFormattedTime(),
+  name: 'Gunung Salak',
+  status: 'Level I (Normal)',
+  lastEruption: `Letusan terakhir terkonfirmasi pada 1938. Aktivitas minor terpantau pada ${getFormattedTime()}`,
   recommendations: [
-    'Masyarakat agar tidak melakukan kegiatan apapun di daerah potensi bahaya.',
-    'Masyarakat agar mengantisipasi gangguan akibat abu vulkanik dari erupsi.',
-    'Masyarakat agar mewaspadai bahaya lahar terutama saat terjadi hujan di seputar puncak.',
+    'Aktivitas vulkanik pada tingkat normal.',
+    'Masyarakat dan wisatawan dihimbau untuk tidak mendekati kawah dalam radius 1 km.',
+    'Tetap waspada dan ikuti informasi dari sumber resmi.',
   ]
 };
 
