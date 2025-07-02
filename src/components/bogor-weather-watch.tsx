@@ -8,7 +8,6 @@ import type { WeatherRecommendationsOutput } from '@/ai/flows/weather-recommenda
 import CurrentWeather from './current-weather';
 import SevenDayForecast from './seven-day-forecast';
 import AiRecommendations from './ai-recommendations';
-import { Sun } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const setCookie = (name: string, value: string, days: number) => {
@@ -111,12 +110,11 @@ export default function BogorWeatherWatch() {
     };
 
     return (
-        <div className="min-h-screen w-full bg-background text-foreground p-4 sm:p-6 md:p-8 font-body">
+        <div className="w-full bg-background text-foreground p-4 sm:p-6 md:p-8 font-body">
             <div className="container mx-auto">
                 <header className="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4">
                     <div className="flex items-center gap-3">
-                        <Sun className="w-12 h-12 text-primary" />
-                        <h1 className="text-3xl md:text-4xl font-headline font-bold text-primary">Bogor Weather Watch</h1>
+                        <h1 className="text-3xl md:text-4xl font-headline font-bold text-primary">Weather Watch</h1>
                     </div>
                     <div className="bg-primary/20 p-1 rounded-full flex gap-1 transition-all duration-300">
                         <Button onClick={() => handleLocationChange('city')} variant={location === 'city' ? 'default' : 'ghost'} className="rounded-full px-4 sm:px-6 shadow-sm" size="sm">Bogor City</Button>

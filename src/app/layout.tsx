@@ -1,10 +1,11 @@
 import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster"
+import { AppHeader } from '@/components/app-header';
 
 export const metadata: Metadata = {
-  title: 'Bogor Weather Watch',
-  description: 'Weather application for Bogor City and Regency',
+  title: 'Bogor Info Hub',
+  description: 'Weather and earthquake information for Bogor City and Regency',
 };
 
 export default function RootLayout({
@@ -19,7 +20,8 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet" />
       </head>
-      <body className="font-body antialiased">
+      <body className="font-body antialiased min-h-screen bg-background text-foreground">
+        <AppHeader />
         {children}
         <Toaster />
       </body>
