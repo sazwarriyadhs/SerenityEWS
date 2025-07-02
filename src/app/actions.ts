@@ -16,8 +16,9 @@ import { volcanoInfo, VolcanoInfoInput, VolcanoInfoOutput } from "@/ai/flows/vol
 import { getFloodData, FloodData } from "@/lib/flood";
 import { floodInfo, FloodInfoInput, FloodInfoOutput } from "@/ai/flows/flood-info";
 import { categorizeReport, CategorizeReportInput, CategorizeReportOutput } from "@/ai/flows/categorize-report";
-import { UserReport, initialReports } from "@/lib/reports";
+import type { UserReport } from "@/lib/reports";
 import { nearbyAlert, NearbyAlertOutput } from "@/ai/flows/nearby-alert-flow";
+import pool from "@/lib/db";
 
 
 type Language = 'en' | 'id';
@@ -206,10 +207,24 @@ export async function fetchFloodInfo(input: z.infer<typeof FloodInfoInputClientS
 }
 
 export async function fetchReports(): Promise<UserReport[]> {
-    // In a real app, this would fetch from a database.
-    // For now, we return a mutable mock data array.
-    await new Promise(resolve => setTimeout(resolve, 500));
-    return initialReports;
+    try {
+        const result = await pool.query('SELECT id, photo_data_uri, description, location, category, summary, timestamp, "user", photo_hint FROM reports ORDER BY timestamp DESC');
+        
+        return result.rows.map(row => ({
+            id: row.id.toString(),
+            photoDataUri: row.photo_data_uri,
+            description: row.description,
+            location: row.location,
+            category: row.category,
+            summary: row.summary,
+            timestamp: new Date(row.timestamp).toISOString(),
+            user: row.user,
+            photoHint: row.photo_hint,
+        }));
+    } catch (error) {
+        console.error('Database Error: Failed to fetch reports.', error);
+        return [];
+    }
 }
 
 const SubmitReportInputClientSchema = z.object({
@@ -234,18 +249,40 @@ export async function submitReport(input: z.infer<typeof SubmitReportInputClient
             throw new Error("AI analysis failed.");
         }
 
+        const reportToInsert = {
+            photoDataUri: validatedInput.photoDataUri,
+            description: validatedInput.description,
+            location: validatedInput.location,
+            category: aiResult.category,
+            summary: aiResult.summary,
+            photoHint: aiResult.photoHint,
+            user: lang === 'en' ? 'Anonymous Citizen' : 'Warga Anonim',
+        };
+        
+        const result = await pool.query(
+            `INSERT INTO reports(photo_data_uri, description, location, category, summary, photo_hint, "user", timestamp) 
+            VALUES($1, $2, $3, $4, $5, $6, $7, NOW()) 
+            RETURNING id, timestamp`,
+            [
+                reportToInsert.photoDataUri,
+                reportToInsert.description,
+                JSON.stringify(reportToInsert.location),
+                reportToInsert.category,
+                reportToInsert.summary,
+                reportToInsert.photoHint,
+                reportToInsert.user,
+            ]
+        );
+
         const newReport: UserReport = {
-            id: new Date().toISOString(),
+            id: result.rows[0].id.toString(),
             ...validatedInput,
             category: aiResult.category,
             summary: aiResult.summary,
             photoHint: aiResult.photoHint,
-            timestamp: new Date().toISOString(),
-            user: lang === 'en' ? 'Anonymous Citizen' : 'Warga Anonim', // Placeholder for user
+            timestamp: new Date(result.rows[0].timestamp).toISOString(),
+            user: reportToInsert.user,
         };
-
-        // Prepend to the in-memory array to simulate persistence
-        initialReports.unshift(newReport);
 
         return newReport;
 
