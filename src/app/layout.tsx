@@ -5,8 +5,8 @@ import { AppHeader } from '@/components/app-header';
 import { Providers } from '@/components/providers';
 
 export const metadata: Metadata = {
-  title: 'Bogor Info Hub',
-  description: 'Weather and earthquake information for Bogor City and Regency',
+  title: 'Serenity Bogor - Early Warning System',
+  description: 'Weather and disaster information for Bogor City and Regency',
 };
 
 export default function RootLayout({

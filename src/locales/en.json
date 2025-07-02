@@ -1,6 +1,7 @@
 {
     "header": {
-        "title": "Bogor Info Hub"
+        "title": "Serenity Bogor",
+        "subtitle": "Early Warning System"
     },
     "nav": {
         "weather": "Weather",
