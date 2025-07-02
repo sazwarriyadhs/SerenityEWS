@@ -61,19 +61,19 @@ User's Location:
 - Longitude: {{{userLocation.longitude}}}
 
 Latest Disaster Data & Coordinates:
-- Flood (Katulampa Dam): Status '{{{disasterData.flood.status}}}'. This is a high risk if status is Siaga 1, 2, or 3. The risk is for downstream areas, so proximity to the dam at {{{disasterData.flood.damCoords.latitude}}}, {{{disasterData.flood.damCoords.longitude}}} is not the primary factor, but the status is.
-- Earthquake: Magnitude {{{disasterData.earthquake.magnitude}}} at Coords: {{{disasterData.earthquake.epicenterCoords.latitude}}}, {{{disasterData.earthquake.epicenterCoords.longitude}}}. Any magnitude > 4.5 is a potential risk.
-- Landslide: Risk '{{{disasterData.landslide.riskLevel}}}' at Coords: {{{disasterData.landslide.coords.latitude}}}, {{{disasterData.landslide.coords.longitude}}}. High risk if level is 'High'.
-- Fire: '{{{disasterData.fire.status}}}' fire at Coords: {{{disasterData.fire.coords.latitude}}}, {{{disasterData.fire.coords.longitude}}}. High risk if 'Active'.
-- Volcano (Mount Salak): Status '{{{disasterData.volcano.status}}}' at Coords: {{{disasterData.volcano.coords.latitude}}}, {{{disasterData.volcano.coords.longitude}}}. High risk if status is not 'Level I (Normal)'.
-- Whirlwind/Typhoon: '{{{disasterData.whirlwind.category}}}' with epicenter at Coords: {{{disasterData.whirlwind.epicenterCoords.latitude}}}, {{{disasterData.whirlwind.epicenterCoords.longitude}}}.
+- Flood (Katulampa Dam): Status '{{{disasterData.flood.status}}}' at {{{disasterData.flood.location}}}. This is a high risk if status is Siaga 1, 2, or 3. The risk is for downstream areas, so proximity to the dam at {{{disasterData.flood.damCoords.latitude}}}, {{{disasterData.flood.damCoords.longitude}}} is not the primary factor, but the status is.
+- Earthquake: Magnitude {{{disasterData.earthquake.magnitude}}} at {{{disasterData.earthquake.location}}}. Coords: {{{disasterData.earthquake.epicenterCoords.latitude}}}, {{{disasterData.earthquake.epicenterCoords.longitude}}}. Any magnitude > 4.5 is a potential risk.
+- Landslide: Risk '{{{disasterData.landslide.riskLevel}}}' at {{{disasterData.landslide.location}}}. Coords: {{{disasterData.landslide.coords.latitude}}}, {{{disasterData.landslide.coords.longitude}}}. High risk if level is 'High'.
+- Fire: '{{{disasterData.fire.status}}}' fire at {{{disasterData.fire.location}}}. Coords: {{{disasterData.fire.coords.latitude}}}, {{{disasterData.fire.coords.longitude}}}. High risk if 'Active'.
+- Volcano (Mount Salak): Status '{{{disasterData.volcano.status}}}' at {{{disasterData.volcano.name}}}. Coords: {{{disasterData.volcano.coords.latitude}}}, {{{disasterData.volcano.coords.longitude}}}. High risk if status is not 'Level I (Normal)'.
+- Whirlwind/Typhoon: '{{{disasterData.whirlwind.category}}}' with epicenter at {{{disasterData.whirlwind.location}}}. Coords: {{{disasterData.whirlwind.epicenterCoords.latitude}}}, {{{disasterData.whirlwind.epicenterCoords.longitude}}}.
 
 Your Task:
 1.  Analyze all disaster data. For each disaster, determine if the user's location is within the {{{unsafeRadiusKm}}} km high-risk radius of the disaster's coordinates.
 2.  Prioritize the most immediate and severe threat. A direct proximity threat (e.g., Fire, Landslide) is generally higher priority than a regional one (e.g., distant earthquake), unless the regional event is exceptionally severe. Flood risk is determined by status, not proximity.
 3.  If you determine there is a significant risk due to proximity or a high alert status, set 'isAtRisk' to true.
 4.  If at risk:
-    a. Fill in 'riskType', 'alertTitle', and 'alertMessage'. The message must explain the specific threat and mention that they are within the high-risk zone.
+    a. Fill in 'riskType', 'alertTitle', and 'alertMessage'. The message must explain the specific threat, explicitly mention the location of the hazard, and state that they are within the high-risk zone.
     b. Estimate the 'riskDistanceKm' from the user to the specific hazard.
     c. Generate a list of crucial 'safetyRecommendations' (at least 3).
 5.  If there is no immediate, significant risk, set 'isAtRisk' to false. All other fields should be empty or null.
@@ -81,7 +81,7 @@ Your Task:
 `,
 });
 
-const nearbyAlertFlow = ai.defineFlow(
+const categorizeReportFlow = ai.defineFlow(
   {
     name: 'nearbyAlertFlow',
     inputSchema: NearbyAlertInputSchema,
