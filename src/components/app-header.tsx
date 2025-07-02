@@ -51,9 +51,9 @@ export function AppHeader() {
                     <Link href="/" className="flex items-center gap-3 font-bold">
                         <Image
                             src="/images/logo.png"
-                            alt="Serenity Bogor Logo"
-                            width={56}
-                            height={56}
+                            alt="Serenity EWS Bogor Logo"
+                            width={150}
+                            height={150}
                             className="h-14 w-14"
                         />
                         <div className="hidden sm:block">

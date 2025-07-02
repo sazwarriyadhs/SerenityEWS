@@ -3,6 +3,7 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster"
 import { AppHeader } from '@/components/app-header';
 import { Providers } from '@/components/providers';
+import { AppWrapper } from '@/components/app-wrapper';
 
 export const metadata: Metadata = {
   title: 'Serenity Bogor - Early Warning System',
@@ -23,9 +24,11 @@ export default function RootLayout({
       </head>
       <body className="font-body antialiased min-h-screen bg-background text-foreground">
         <Providers>
-          <AppHeader />
-          {children}
-          <Toaster />
+          <AppWrapper>
+            <AppHeader />
+            {children}
+            <Toaster />
+          </AppWrapper>
         </Providers>
       </body>
     </html>
