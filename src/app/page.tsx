@@ -1,3 +1,9 @@
+import BogorWeatherWatch from '@/components/bogor-weather-watch';
+
 export default function Home() {
-  return <></>;
+  return (
+    <main>
+      <BogorWeatherWatch />
+    </main>
+  );
 }
